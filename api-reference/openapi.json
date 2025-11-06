@@ -1,216 +1,202 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.3",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
-    "version": "1.0.0"
+    "title": "EmberQA Call Scoring API",
+    "description": "Submit call recordings programmatically for scoring and analysis. This API allows you to integrate call scoring directly into your existing systems and workflows.\n\n## Authentication\nAll requests require a Bearer token in the Authorization header. API keys are provided on the EmberQA dashboard under the \"Integrations\" tab.\n\n## Audio Requirements\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 20MB\n- **Audio quality:** Minimum 8kHz sample rate recommended",
+    "version": "1.0.0",
+    "contact": {
+      "name": "EmberQA Support",
+      "url": "https://emberqa.com"
+    }
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://api.emberqa.com/api",
+      "description": "Production server"
     }
   ],
   "security": [
     {
-      "bearerAuth": []
+      "BearerAuth": []
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/scoring/submitRecording": {
       "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
+        "summary": "Submit Call Recording",
+        "description": "Submit a call recording for scoring and analysis by providing a publicly accessible URL to the audio file.",
+        "operationId": "submitRecording",
+        "tags": [
+          "Call Scoring"
+        ],
+        "x-mint": {
+          "content": "## Audio Requirements\n\nBefore submitting recordings, ensure they meet these requirements:\n\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 20MB\n- **Audio quality:** Minimum 8kHz sample rate recommended"
         },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
+        "security": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+            "BearerAuth": []
           }
         ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
-      "post": {
-        "description": "Information about a new plant added to the store",
         "requestBody": {
-          "description": "Plant added to the store",
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/MediaUrlRequest"
+              },
+              "example": {
+                "agent_name": "John D",
+                "media_url": "https://example.com/call-audio.mp3",
+                "metadata": {
+                  "key1": "value1",
+                  "key2": "value2"
+                },
+                "language": "en",
+                "supporting_docs": [
+                  "https://example.com/crm-information.pdf",
+                  "https://example.com/customer-notes.txt"
+                ]
               }
             }
           }
         },
         "responses": {
-          "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
+          "202": {
+            "description": "File Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                },
+                "example": {
+                  "message": "File Accepted"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters or file format",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Payload Too Large - File exceeds 20MB limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type - File format not supported",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
     }
   },
   "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "API Key",
+        "description": "API key obtained from the EmberQA dashboard under the \"Integrations\" tab"
+      }
+    },
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "MediaUrlRequest": {
         "type": "object",
+        "required": ["media_url"],
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
+          "agent_name": {
+            "type": "string",
+            "description": "Name of the agent who handled the call",
+            "example": "John D"
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
+          "media_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Publicly accessible URL to the audio file (MP3 or WAV, max 20MB)",
+            "example": "https://example.com/call-audio.mp3"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Key-value pairs for additional call metadata",
+            "example": {
+              "customer_id": "12345",
+              "call_type": "support",
+              "department": "technical"
+            }
+          },
+          "language": {
+            "type": "string",
+            "description": "Language code for the call audio. Defaults to English (\"en\") if not provided. Use ISO 639-1 language codes, except for Mandarin which uses ISO 639-3 code \"cmn\". See supported languages list in documentation.",
+            "example": "en",
+            "default": "en"
+          },
+          "supporting_docs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "Array of publicly accessible URLs to supporting documents. Supported file types: PDF (.pdf), Text (.txt), Images (.jpg)",
+            "example": [
+              "https://example.com/crm-information.pdf",
+              "https://example.com/customer-notes.txt",
+              "https://example.com/screenshot.jpg"
+            ]
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "File Accepted"
           }
-        ]
+        }
       },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
+      "ErrorResponse": {
         "type": "object",
         "properties": {
           "error": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "description": "Error message describing what went wrong"
           },
-          "message": {
-            "type": "string"
+          "details": {
+            "type": "string",
+            "description": "Additional details about the error (optional)"
           }
         }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
       }
     }
   }
