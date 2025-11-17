@@ -54,6 +54,11 @@
       "href": "https://app.emberqa.com"
     }
   },
+  "seo": {
+    "metatags": {
+      "canonical": "https://docs.emberqa.com"
+    }
+  },
 
   "footer": {
     "socials": {

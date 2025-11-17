@@ -140,12 +140,31 @@
               "schema": {
                 "$ref": "#/components/schemas/DocumentUrlRequest"
               },
-              "example": {
-                "agent_name": "John D",
-                "media_url": "https://example.com/document.pdf",
-                "metadata": {
-                  "key1": "value1",
-                  "key2": "value2"
+              "examples": {
+                "single_url": {
+                  "summary": "Single document URL",
+                  "value": {
+                    "agent_name": "John D",
+                    "media_url": "https://example.com/document.pdf",
+                    "metadata": {
+                      "key1": "value1",
+                      "key2": "value2"
+                    }
+                  }
+                },
+                "multiple_urls": {
+                  "summary": "Multiple document URLs",
+                  "value": {
+                    "agent_name": "John D",
+                    "media_url": [
+                      "https://example.com/document1.pdf",
+                      "https://example.com/document2.pdf"
+                    ],
+                    "metadata": {
+                      "key1": "value1",
+                      "key2": "value2"
+                    }
+                  }
                 }
               }
             }
@@ -277,10 +296,25 @@
             "example": "John D"
           },
           "media_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "Publicly accessible URL to the PDF file (max 20MB)",
-            "example": "https://example.com/document.pdf"
+            "oneOf": [
+              {
+                "type": "string",
+                "format": "uri",
+                "example": "https://example.com/document.pdf"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                },
+                "example": [
+                  "https://example.com/document1.pdf",
+                  "https://example.com/document2.pdf"
+                ]
+              }
+            ],
+            "description": "Publicly accessible URL(s) to the PDF file(s) (max 20MB each). Can be a single URL string or an array of URL strings."
           },
           "metadata": {
             "type": "object",
