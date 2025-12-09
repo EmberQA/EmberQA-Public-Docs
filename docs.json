@@ -18,6 +18,43 @@
           {
             "group": "API documentation",
             "pages": ["api-reference/introduction"]
+          },
+          {
+            "group": "Scoring",
+            "pages": [
+              {
+                "group": "Calls",
+                "pages": [
+                  "POST /scoring/submitRecording"
+                ]
+              },
+              {
+                "group": "Documents",
+                "pages": [
+                  "POST /scoring/submitDocument"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Workflows",
+            "pages": [
+              {
+                "group": "Workflow Runs",
+                "pages": [
+                  "POST /workflows/submit",
+                  "POST /workflows/runs/getData",
+                  "POST /workflows/runs/getDetails"
+                ]
+              },
+              {
+                "group": "Extraction Templates",
+                "pages": [
+                  "POST /workflows/extractionTemplates/getById",
+                  "POST /workflows/extractionTemplates/getAll"
+                ]
+              }
+            ]
           }
         ]
       }
