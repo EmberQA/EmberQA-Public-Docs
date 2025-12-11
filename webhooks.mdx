@@ -1,0 +1,259 @@
+---
+title: Webhooks
+description: 'Receive real-time notifications for scoring events via HTTP webhooks'
+---
+
+EmberQA can send webhook notifications to your server when specific events occur, such as red flags detected, low scores, or processing completion.
+
+## Configuration
+
+Webhooks are configured through the EmberQA dashboard:
+
+1. Navigate to **Settings** → **Alerts**
+2. Click **Create New Alert**
+3. Select **Webhook** as the alert type
+4. Enter your webhook endpoint URL
+5. Choose your trigger type and content types
+6. Save the alert
+
+## HTTP Specifications
+
+| Property | Value |
+|----------|-------|
+| **Method** | POST |
+| **Content-Type** | application/json |
+| **Timeout** | 30 seconds |
+| **Retry Attempts** | 2 |
+| **Success Response** | HTTP 200-299 |
+
+## Webhook Types
+
+### Red Flag Alert
+
+Triggered when red flag criteria is detected in a call or document.
+
+```typescript
+interface RedFlagWebhook {
+  webhook_id: string;      // Unique ID for deduplication
+  content_id: string;      // UUID of the call/document
+  alert_type: "red_flag";
+  content_type: "Call" | "Document";
+  file_name: string;
+  agent_name?: string;
+  red_flag_reason: string;
+  total_score?: number;
+  score_details?: ScoreDetails;
+  timestamp: string;       // ISO 8601 format
+}
+```
+
+**Example:**
+
+```json
+{
+  "webhook_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "content_id": "a8f5f167-aa8a-4f1e-85c7-1b9c8d6e7f23",
+  "alert_type": "red_flag",
+  "content_type": "Call",
+  "file_name": "customer_support_call.wav",
+  "agent_name": "John Doe",
+  "red_flag_reason": "Inappropriate language detected",
+  "total_score": 42,
+  "score_details": {
+    "professionalism_score": 2,
+    "professionalism_justification": "Agent used inappropriate language"
+  },
+  "timestamp": "2025-01-16T15:30:45.123Z"
+}
+```
+
+---
+
+### Low Score Alert
+
+Triggered when a score falls below the configured threshold.
+
+```typescript
+interface LowScoreWebhook {
+  webhook_id: string;
+  content_id: string;
+  alert_type: "low_score";
+  content_type: "Call" | "Document";
+  total_score: number;
+  total_score_threshold: number;
+  file_name: string;
+  agent_name: string;
+  summary: string | null;
+  score_details: ScoreDetails;
+  timestamp: string;
+}
+```
+
+**Example:**
+
+```json
+{
+  "webhook_id": "b23c4d5e-6f7a-8b9c-0d1e-2f3456789abc",
+  "content_id": "c9e2a3b7-4d5f-6789-a012-3456789bcdef",
+  "alert_type": "low_score",
+  "content_type": "Call",
+  "total_score": 45,
+  "total_score_threshold": 70,
+  "file_name": "sales_call.wav",
+  "agent_name": "John Doe",
+  "summary": "Customer billing inquiry",
+  "score_details": {
+    "greeting_quality_score": 8,
+    "greeting_quality_justification": "Agent provided friendly greeting",
+    "problem_resolution_score": 3,
+    "problem_resolution_justification": "Failed to resolve billing issue"
+  },
+  "timestamp": "2025-01-16T15:30:45.123Z"
+}
+```
+
+---
+
+### Completion Alert
+
+Triggered when processing completes. Available for calls, documents, and workflows.
+
+```typescript
+interface CompletionWebhook {
+  webhook_id: string;
+  trigger_reason: "completed_action";
+  content_id: string;
+  data: {
+    // For Calls/Documents:
+    score_details?: ScoreDetails;
+    original_filename?: string;
+    score_uuid?: string;
+    created_time?: string;
+    agent_name?: string;
+    reason_for_call?: string;
+    
+    // For Workflows:
+    output_schema?: Record<string, {
+      value: string | null;
+      reasoning: string | null;
+    }>;
+    status?: string;
+    cost?: number;
+  };
+}
+```
+
+**Example (Workflow):**
+
+```json
+{
+  "webhook_id": "d34e5f6a-7b8c-9d0e-1f2a-3456789abcde",
+  "trigger_reason": "completed_action",
+  "content_id": "e45f6a7b-8c9d-0e1f-2a34-56789abcdef0",
+  "data": {
+    "output_schema": {
+      "customer_name": {
+        "value": "John Smith",
+        "reasoning": "Found in header section"
+      },
+      "policy_number": {
+        "value": "POL-2025-001234",
+        "reasoning": "Extracted from policy ID field"
+      }
+    },
+    "status": "complete",
+    "cost": 0.45
+  }
+}
+```
+
+**Example (Call):**
+
+```json
+{
+  "webhook_id": "f56a7b8c-9d0e-1f2a-3b4c-56789abcdef1",
+  "trigger_reason": "completed_action",
+  "content_id": "g67b8c9d-0e1f-2a3b-4c5d-6789abcdef12",
+  "data": {
+    "score_details": {
+      "greeting_quality_score": 9,
+      "greeting_quality_justification": "Professional greeting"
+    },
+    "original_filename": "support_call_001.wav",
+    "agent_name": "Jane Smith",
+    "reason_for_call": "Customer support inquiry"
+  }
+}
+```
+
+---
+
+## Score Details Structure
+
+The `score_details` object contains metric scores and justifications:
+
+```typescript
+interface ScoreDetails {
+  [key: string]: number | string;
+  // Pattern: {metric_name}_score: number (0-10)
+  // Pattern: {metric_name}_justification: string
+}
+```
+
+---
+
+## Handling Webhooks
+
+### Response Requirements
+
+Your endpoint must return an HTTP 200-299 status within 30 seconds.
+
+```javascript
+app.post("/webhook", (req, res) => {
+  const webhook = req.body;
+  
+  // Process asynchronously if needed
+  processWebhookAsync(webhook);
+  
+  // Respond immediately
+  res.status(200).json({ received: true });
+});
+```
+
+### Idempotency
+
+Use `webhook_id` to prevent duplicate processing:
+
+```javascript
+app.post("/webhook", async (req, res) => {
+  const { webhook_id } = req.body;
+  
+  // Check if already processed
+  if (await isProcessed(webhook_id)) {
+    return res.status(200).json({ received: true, duplicate: true });
+  }
+  
+  // Mark as processed before handling
+  await markProcessed(webhook_id);
+  
+  // Handle the webhook
+  await handleWebhook(req.body);
+  
+  res.status(200).json({ received: true });
+});
+```
+
+<Tip>
+Store processed `webhook_id` values for at least 24 hours to handle retries.
+</Tip>
+
+---
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| No webhooks received | Verify URL is publicly accessible and alert is configured correctly |
+| Timeouts | Ensure endpoint responds within 30 seconds; process asynchronously |
+| Failed deliveries | Check alert history in dashboard for error details |
+| Missing fields | Some fields are optional depending on content type and availability |

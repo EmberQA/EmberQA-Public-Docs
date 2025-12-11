@@ -536,7 +536,7 @@
           "Workflow Runs"
         ],
         "x-mint": {
-          "content": "## Status Values\n\n| Status | Description |\n|--------|-------------|\n| `pending` | Queued for processing |\n| `processing` | Currently being processed |\n| `completed` | Successfully completed - check `output_schema` for results |\n| `failed` | Processing failed - check `failure_reason` for details |\n\n## Result Data\n\nWhen status is `completed`, the response includes:\n- `output_schema` - Extracted data matching your template fields\n- `supportingDocs` - Array of processed files with presigned download URLs"
+          "content": "## Status Values\n\n| Status | Description |\n|--------|-------------|\n| `pending` | Queued for processing |\n| `processing` | Currently being processed |\n| `completed` | Successfully completed - check `output_schema` for results |\n| `failed` | Processing failed - check `failure_reason` for details |\n\n## Result Data\n\nWhen status is `completed`, the response includes:\n- `output_schema` - Extracted data where each field contains a `value` and `reasoning`\n- `supportingDocs` - Array of processed files with presigned download URLs\n\n## Output Schema Format\n\nEach field in `output_schema` returns an object with:\n- `value` - The extracted data (string or null if not found)\n- `reasoning` - Explanation of how/why the value was extracted"
         },
         "security": [
           {
@@ -580,10 +580,22 @@
                           "document_type": "contract"
                         },
                         "output_schema": {
-                          "contract_number": "CTR-789456",
-                          "effective_date": "2024-01-01",
-                          "total_value": "$50,000",
-                          "payment_terms": "Net 30"
+                          "contract_number": {
+                            "value": "CTR-789456",
+                            "reasoning": "Found in the header section on page 1, labeled 'Contract #'"
+                          },
+                          "effective_date": {
+                            "value": "2024-01-01",
+                            "reasoning": "Located in the terms section, specified as 'Effective Date: January 1, 2024'"
+                          },
+                          "total_value": {
+                            "value": "$50,000",
+                            "reasoning": "Extracted from the payment schedule showing total contract value"
+                          },
+                          "payment_terms": {
+                            "value": "Net 30",
+                            "reasoning": "Found in payment terms section on page 2"
+                          }
                         },
                         "supportingDocs": [
                           {
@@ -982,8 +994,22 @@
           },
           "output_schema": {
             "type": "object",
-            "additionalProperties": true,
-            "description": "Extracted data (when status is completed)"
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "The extracted value, or null if not found"
+                },
+                "reasoning": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "Explanation of how/why the value was extracted"
+                }
+              }
+            },
+            "description": "Extracted data (when status is completed). Each field contains a value and reasoning."
           }
         }
       },
@@ -1084,8 +1110,22 @@
           },
           "output_schema": {
             "type": "object",
-            "additionalProperties": true,
-            "description": "Extracted data matching your template fields (when status is completed)"
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "The extracted value, or null if not found"
+                },
+                "reasoning": {
+                  "type": "string",
+                  "nullable": true,
+                  "description": "Explanation of how/why the value was extracted"
+                }
+              }
+            },
+            "description": "Extracted data matching your template fields (when status is completed). Each field contains a value and reasoning."
           },
           "supportingDocs": {
             "type": "array",
