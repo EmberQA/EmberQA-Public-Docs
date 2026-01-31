@@ -1,0 +1,50 @@
+---
+title: "Upload"
+description: "Submit calls, documents, or workflow files"
+icon: "cloud-arrow-up"
+---
+
+The Upload page lets you submit files for processing. Use the tabs to choose what type of files you're uploading.
+
+## Tabs
+
+### Call Processing
+
+Upload audio files for call QA scoring.
+
+- **Formats**: MP3, WAV
+- **Limit**: Up to 50 files, max 50MB total
+
+### Document Processing
+
+Upload documents for document QA scoring.
+
+- **Formats**: PDF, TXT, MD, RTF, PNG, JPG
+- **Limit**: Up to 20 files, max 50MB total
+
+### Workflow Processing
+
+Upload files for workflow extraction (data extraction from documents).
+
+- **Formats**: PDF, TXT, MD, RTF, PNG, JPG
+- **Limit**: Up to 200 files, max 50MB total
+
+You'll need to select an extraction template before uploading workflow files.
+
+## How to Upload
+
+1. Select the appropriate tab for your file type
+2. Drag and drop files, or click to browse
+3. (For workflows) Select an extraction template
+4. Click **Upload**
+
+After upload completes, you'll be redirected to the appropriate dashboard to view results.
+
+## API Upload
+
+For programmatic uploads, click the **API Docs** button (available on the Call Processing tab) to see webhook integration options.
+
+See also:
+- [Submit Call Recording](/api-reference/scoring/submit-call-recording)
+- [Submit Document](/api-reference/scoring/submit-document)
+- [Submit Workflow](/api-reference/workflow-submission/submit-workflow)

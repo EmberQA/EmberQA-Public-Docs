@@ -1,0 +1,40 @@
+---
+title: "Metadata"
+description: "Configure custom metadata fields"
+icon: "tags"
+---
+
+Configure custom metadata fields that appear in your dashboard filters and call details.
+
+## What is Metadata?
+
+When you submit calls via API, you can include custom metadata like:
+- Call type (inbound/outbound)
+- Department
+- Campaign name
+- Customer segment
+- Any other custom fields
+
+This tab lets you control how that metadata appears in the app.
+
+## Configuring Metadata Display
+
+For each metadata field, you can configure:
+
+| Setting | Description |
+|---------|-------------|
+| **Display Name** | How the field appears in the UI |
+| **Show in Dashboard** | Whether it appears as a dashboard filter |
+| **Show in Details** | Whether it appears in call detail views |
+
+## Adding Metadata Fields
+
+1. Click **Add Field**
+2. Enter the **Field Key** - must match the key you send via API
+3. Enter a **Display Name** - the user-friendly label
+4. Configure visibility options
+5. Save
+
+## Using Metadata Filters
+
+Once configured, metadata filters appear alongside Date, Agent, and Score filters on the Dashboard. Users can filter calls by any metadata field you've enabled.

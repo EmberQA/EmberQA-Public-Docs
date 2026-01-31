@@ -1,0 +1,69 @@
+---
+title: "Alerts"
+description: "Configure automated notifications"
+icon: "bell"
+---
+
+Alerts send you notifications when specific conditions are met, such as low scores or red flags. Get notified via email or webhook in real-time.
+
+## Tabs
+
+- **Alerts** - Configure alert rules
+- **History** - View past alert triggers
+
+## Creating an Alert
+
+1. Click **Create Alert**
+2. Enter an **Alert Name** (e.g., "Low Score Notification")
+3. Choose the **Alert Type**:
+   - **Email** - Sends an email notification
+   - **Webhook** - Sends an HTTP POST request to your URL
+4. Enter the **Contact Information** (email address or webhook URL)
+5. Select **Content Types** to monitor (Calls, Documents, or both)
+6. Choose an **Alert Trigger**:
+   - **Score-based** - Triggers when score falls below your threshold
+   - **Red Flag** - Triggers when any red flag is detected
+   - **Completion** - Triggers when processing completes (webhook only)
+7. If score-based, set the **Score Threshold** using the slider
+8. Click **Create**
+
+## Alert Triggers Explained
+
+| Trigger | When It Fires |
+|---------|---------------|
+| **Score-based** | When a call/document scores at or below your threshold |
+| **Red Flag** | When any configured red flag is detected |
+| **Completion** | When any call/document finishes processing (useful for integrations) |
+
+## Webhook Alerts
+
+When using webhooks, EmberQA sends a POST request to your URL with JSON data including:
+
+- Call/document ID and filename
+- Agent name
+- Score and score breakdown
+- Red flag details (if applicable)
+- Timestamp
+
+Click the info icon next to the webhook URL field to view full documentation with example payloads.
+
+## Managing Alerts
+
+The Alerts tab lists all configured alerts. For each alert you can:
+- **Edit** - Modify the conditions or settings
+- **Delete** - Remove the alert
+
+## Alert History
+
+The History tab shows when alerts have triggered, including:
+
+| Column | Description |
+|--------|-------------|
+| **Alert Name** | Which alert was triggered |
+| **Type** | Email or Webhook |
+| **Content Type** | Call, Document, or Workflow |
+| **Trigger Reason** | Why the alert fired (score, red flag, etc.) |
+| **Recipient** | Where the alert was sent |
+| **Date** | When it happened |
+
+Click any row to see the full payload that was sent.

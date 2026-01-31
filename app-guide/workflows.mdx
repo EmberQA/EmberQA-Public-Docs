@@ -1,0 +1,133 @@
+---
+title: "Workflows"
+description: "Extract structured data from documents using AI"
+icon: "robot"
+---
+
+Workflows let you automatically extract structured data from documents using AI. Define what data you need, upload documents, and get structured results.
+
+## Workflows Overview
+
+The Workflows page has two tabs:
+
+1. **Workflow Runs** - See all documents that have been processed
+2. **Extraction Templates** - Create and manage extraction templates
+
+## Workflow Runs Tab
+
+This tab shows all documents submitted for data extraction.
+
+### Table Columns
+
+| Column | Description |
+|--------|-------------|
+| **Filename** | Name of the uploaded document |
+| **Extraction Template** | Which template was used for extraction |
+| **Status** | Pending, Processing, Completed, or Failed |
+| **Created** | When the document was submitted to EmberQA |
+
+### Filtering Workflow Runs
+
+Click the **Filters** section to expand it. Available filters:
+
+| Filter | Description |
+|--------|-------------|
+| **Status** | Filter by Pending, Processing, Completed, or Failed |
+| **Extraction Template** | Show only runs using a specific template |
+| **Filename** | Search by document filename |
+
+After setting filters, click **Apply Filters**. Use **Clear All** to reset.
+
+### Viewing Run Details
+
+Click any row to open the detail popup. The popup shows:
+
+**Basic Information**
+- Filename
+- Extraction Template used
+- Created timestamp
+
+**Failure Reason** (if applicable)
+- If the extraction failed, you'll see the error message explaining why
+
+**Metadata**
+- Any custom metadata attached to the document (shown as key-value pairs)
+
+**Extracted Data**
+- A table showing each property defined in the template
+- For each property: the extracted value and the AI's reasoning for that extraction
+- If extraction is still in progress, you'll see a "Data extraction is in progress..." message
+
+**Supporting Documents**
+- If the workflow included supporting documents, you can view them here
+
+Use the **Previous/Next** buttons to navigate between workflow runs.
+
+## Extraction Templates Tab
+
+Extraction templates define what data to pull from your documents. Think of them as forms that the AI fills out by reading your documents.
+
+### Template List
+
+The list shows all your extraction templates with:
+
+| Column | Description |
+|--------|-------------|
+| **Template Name** | Display name for the template |
+| **ID** | Unique identifier (used in API calls) |
+| **Properties** | Chips showing each field the template extracts |
+| **Actions** | View or Edit buttons |
+
+### Creating a New Template
+
+1. Click **Create New Template**
+2. Enter a **Template Name**
+3. Add **Properties** - these are the fields you want to extract
+
+For each property, you'll define:
+- **Property Name** - The field name (e.g., "invoice_number", "customer_name")
+- **Description** - Instructions telling the AI what to look for
+- **Type** - Either:
+  - **Extract Text** - AI extracts free-form text
+  - **Select One** - AI picks from predefined options you provide
+
+4. Click **Save** when done
+
+### Property Types Explained
+
+**Extract Text**
+Use this when you want the AI to find and extract text from the document. Examples:
+- Customer name
+- Invoice number
+- Contract date
+- Total amount
+
+**Select One**
+Use this when the answer should be one of a fixed set of options. For each option, provide:
+- **Option Key** - The value that will be returned (e.g., "approved")
+- **Option Value** - Description of when to select this option (e.g., "Document shows approval signature")
+
+Examples:
+- Status: Approved, Denied, Pending
+- Document Type: Invoice, Quote, Receipt
+- Priority: High, Medium, Low
+
+### Editing Templates
+
+1. Find the template in the list
+2. Click **Edit**
+3. Make your changes
+4. Click **Save**
+
+### Viewing Template Details
+
+Click **View** on any template to see its full configuration without entering edit mode.
+
+## Submitting Documents for Extraction
+
+Documents can be submitted via:
+
+- **Bulk Upload page** - Manual upload through the UI
+- **API** - Programmatic submission (see [Workflow API](/api-reference/workflow-submission/submit-workflow))
+
+When submitting, you'll select which Extraction Template to use. The AI will then process the document and extract data according to that template's properties.

@@ -1,0 +1,133 @@
+---
+title: "Dashboard"
+description: "Review scored calls and documents with analytics"
+icon: "gauge"
+---
+
+The Dashboard is your central hub for reviewing all scored calls and documents. It shows analytics, lets you filter and search, and gives you detailed access to each scored item.
+
+## Dashboard Overview
+
+When you open the Dashboard, you'll see:
+
+1. **Tabs** at the top to switch between **Calls** and **Documents**
+2. **Analytics cards** showing 24-hour metrics with 30-day comparisons
+3. **Filters** to narrow down what you're looking at
+4. **Data table** listing all scored items
+
+## Understanding the Analytics Cards
+
+The top of the dashboard shows three analytics cards (for the currently selected tab):
+
+| Card | What It Shows |
+|------|---------------|
+| **Total (24 Hours)** | Count of calls/documents scored in the last 24 hours, compared to 30-day daily average |
+| **Avg Score (24 Hours)** | Average score for the last 24 hours, compared to 30-day average |
+| **Score Distribution** | Pie chart showing how scores break down by range (0-50, 51-70, 71-85, 86-100) |
+
+Green percentages mean you're above average; red means below.
+
+## Filtering Your Data
+
+Click the **Filters** section to expand it. Available filters include:
+
+| Filter | Description |
+|--------|-------------|
+| **Start/End Date** | Filter by date range |
+| **Min/Max Score** | Filter by score range (0-100) |
+| **Min/Max Duration** | Filter by call duration in seconds |
+| **Agent Name** | Select or type an agent name |
+| **Team** | Filter by team/tag if you use team groupings |
+| **Failing Metric** | Find calls that failed specific rubric metrics |
+| **Red Flags Only** | Checkbox to show only calls with red flags |
+| **Metadata Filters** | Filter by any custom metadata fields you've configured |
+
+After setting filters, click **Apply Filters**. Use **Clear All** to reset.
+
+## Reading the Data Table
+
+The table shows one row per scored call or document:
+
+**For Calls:**
+- **Agent**: Who handled the call
+- **Reason for Call**: AI-detected reason/summary  
+- **Score**: Score for the call (0-100)
+- **Date/Time**: When the call was recieved by EmberQA
+- **Duration**: Call length
+- **Status**: Complete, Processing, Failed, or Error
+- Plus any custom metadata columns you've configured
+
+**For Documents:**
+- **Filename**: Document name
+- **Agent**: Assigned agent
+- **Score**: Score for the document (0-100)
+- **Date/Time**: When the document was recieved by EmberQA
+- **Status**: Complete, Processing, Failed, or Error
+
+Calls/Documents with red flags appear highlighted with a red left border.
+
+Click any row to open the detail view.
+
+## Reviewing a Call in Detail
+
+When you click a row, a popup opens showing everything about that call.
+
+### Left Panel: Context & Transcript
+
+**Call Info Card** shows:
+- Agent name (editable by admins)
+- Date and time
+- Duration
+- Reason for call (if detected)
+- Original filename
+
+**Call Transcript** has two tabs:
+- **Formatted**: AI-cleaned version (loads automatically)
+- **Original**: Raw transcript
+
+**Audio Recording**: Play the call directly. Use the player controls or keyboard shortcuts:
+- Space: Play/Pause
+- Shift+Left/Right: Seek 10 seconds
+
+**Metadata**: Any custom metadata attached to this call.
+
+### Right Panel: Score Breakdown
+
+**Overall Score** displayed at the top.
+
+**Metric Cards** show each rubric metric with:
+- Pass/Fail indicator
+- Points earned vs possible
+- Click to expand and see the AI's reasoning
+
+**Edit Mode** (Admin only):
+1. Toggle the **Edit Mode** switch
+2. Click any metric row to toggle it between Pass and Fail
+3. Check **Mark as Exemption** if the call shouldn't count in scoring
+4. Click **Save Changes** and confirm
+
+### Navigation
+
+- Use **← →** arrow buttons to move between calls
+- Use keyboard arrows (Left/Right) for faster navigation
+- Press **Escape** to close
+
+## Reassigning an Agent
+
+If the wrong agent was detected:
+
+1. Open the call detail
+2. Click the pencil icon next to the agent name
+3. Type the correct name
+4. Click the checkmark to save
+
+The call will now report under the correct agent.
+
+## Switching Between Calls and Documents
+
+Use the **Calls** and **Documents** tabs at the top of the Dashboard. Each tab has its own:
+- Analytics cards
+- Filters
+- Data table
+
+The Documents tab works the same way as Calls, except there's no audio player in the detail view.

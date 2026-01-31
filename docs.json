@@ -12,6 +12,51 @@
   "navigation": {
     "tabs": [
       {
+        "tab": "Using the App",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["app-guide/overview", "app-guide/getting-started"]
+          },
+          {
+            "group": "Operations",
+            "pages": [
+              "app-guide/dashboard",
+              "app-guide/daily-reports",
+              "app-guide/workflows"
+            ]
+          },
+          {
+            "group": "Performance",
+            "pages": [
+              "app-guide/analytics",
+              "app-guide/coaching",
+              "app-guide/training"
+            ]
+          },
+          {
+            "group": "Standards",
+            "pages": [
+              "app-guide/rubrics",
+              "app-guide/red-flags",
+              "app-guide/alerts"
+            ]
+          },
+          {
+            "group": "Ingestion",
+            "pages": ["app-guide/upload"]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "app-guide/users",
+              "app-guide/agent-management",
+              "app-guide/metadata"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "API reference",
         "openapi": "/api-reference/openapi.json",
         "groups": [
