@@ -4,61 +4,112 @@ description: "Configure scoring criteria for calls and documents"
 icon: "list-check"
 ---
 
-The Rubrics page lets you create and manage the scoring criteria used to evaluate calls and documents.
+The Rubrics page lets you manage scoring criteria and rubric-selection logic for calls and documents.
 
-## Page Layout
+## Rubrics Overview
 
-### Content Type Toggle
+When you open the Rubrics page, you'll see:
 
-Switch between **Calls** and **Documents** rubrics using the dropdown in the top right.
-
-### Tabs
-
-- **Rubrics** - Create and manage rubrics (scoring templates)
-- **Rubric Rules** - Configure which rubric is automatically applied
+1. A **Rubrics** tab for managing rubric templates
+2. A **Rubric Rules** tab for automatic rubric selection
+3. A **Calls/Documents** selector in the top right
 
 ## Rubrics Tab
 
-### What's in a Rubric
+Use this tab to create, edit, activate, and duplicate rubrics.
+
+### What You See in the Rubrics Tab
 
 | Component | Description |
 |-----------|-------------|
-| **Rubric Name** | Identifier for the rubric |
-| **Metrics** | Individual criteria that are scored pass/fail |
-| **Point Values** | Weight of each metric in the overall score |
-| **True/False Conditions** | Definitions for when a metric passes or fails |
+| **Create New Rubric** | Opens the rubric form |
+| **Default Rubric selector** | Sets fallback rubric used when no rubric rule matches |
+| **Rubrics table** | Lists rubric name, status, metric count, version, created date, and actions |
+
+If no default rubric is selected, the page shows a warning because scoring can fail when rules do not match.
 
 ### Creating a Rubric
 
-1. Click **Create Rubric**
-2. Enter rubric name
-3. Add metrics:
-   - Metric name
-   - Point value (weight)
-   - True condition (what counts as pass)
-   - False condition (what counts as fail)
-4. Optionally add exemptions or post-call tags
-5. Save the rubric
+1. Click **Create New Rubric**
+2. Enter a rubric name
+3. In the **Metrics** tab, click **Add Metric**
+4. For each metric, enter:
+   - **Metric Name**
+   - **Points**
+   - **True Condition** (required)
+5. Repeat until total metric points equal **100**
+6. (Optional) Open the **Advanced** tab and add tags, instructions, or exemptions
+7. Click **Create Rubric**
+8. Choose whether to set it as the default rubric in the prompt after save
 
-### Viewing and Editing
+### Editing a Rubric
 
-- Click any rubric to view its details
-- Click **Edit** to modify
-- Click **Duplicate** to create a copy
+1. Find the rubric in the table and click **Edit** (or open detail view first)
+2. Update fields in **Metrics** or **Advanced**
+3. Click **Save Changes**
+4. Confirm default rubric update if prompted
 
-### Active Status
+### Building Metrics
 
-Only one rubric can be active at a time (per type). The active rubric is used for new scoring. Set a rubric to active from its detail page.
+Inside each metric card:
+
+- **True Condition** is required
+- **False Condition** is optional and hidden by default (you can add it when needed)
+- **Additional Instruction** can be attached from the instruction list (if configured)
+
+Metric rules enforced by the form:
+- Total metric points must equal **100**
+- Metric names must be unique
+- At least one metric is required
+
+For call rubrics, each metric has an AI suggestion button, and the form also has an **Audit** button in the header.
+
+If you have 2 or more metrics, turn on **Reorder** to drag and reorder them.
+
+### Advanced Section
+
+Use this tab for optional rubric behavior:
+
+- **Post Call Tags**: Auto-add tags to call metadata during scoring
+- **Additional Instructions**: Create reusable instruction snippets for metrics
+- **Exemptions**: Define conditions where normal scoring should not apply
+
+### Working with Existing Rubrics
+
+From rubric detail view, you can:
+
+- **Edit**
+- **Duplicate**
+- **Activate/Deactivate**
+- **Delete** (inactive rubrics only)
 
 ## Rubric Rules Tab
 
-Rubric rules let you automatically select which rubric to use based on conditions. For example, you might use different rubrics for different call types or departments.
+Use this tab to pick a rubric automatically based on metadata.
 
 ### Creating a Rule
 
-1. Click **Create Rule**
-2. Define conditions (e.g., metadata field equals a value)
-3. Select which rubric to apply when conditions are met
-4. Save the rule
+1. Click **Create New Rule**
+2. Enter a **Rule Name**
+3. Select a **Target Rubric** (or **No Grading**)
+4. Choose **Conditions Required**:
+   - **All** (AND)
+   - **Any** (OR)
+5. Add one or more metadata conditions
+6. Set rule active/inactive
+7. Click **Create Rule**
 
-Rules are evaluated in order. The first matching rule determines the rubric used.
+### Managing Rules
+
+Rules are shown in priority order. The first matching active rule is applied.
+
+You can also:
+- Edit existing rules
+- Delete rules
+- Toggle whether inactive rules are shown in the list
+
+## Switching Between Calls and Documents
+
+Use the selector in the top right to switch between **Calls** and **Documents**.
+
+Both the **Rubrics** and **Rubric Rules** tabs update to the selected type.
