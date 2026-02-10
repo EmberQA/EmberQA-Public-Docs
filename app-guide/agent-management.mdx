@@ -1,48 +1,52 @@
 ---
-title: "Agent Management"
-description: "Map agent names and manage agent tags"
+title: "Agent Aliases"
+description: "Map alternate transcript names to the correct user"
 icon: "user-tag"
 ---
 
-Map agent names from your call recordings to standardize reporting. This is useful when:
-- The name in transcripts doesn't match the agent's actual name
-- Multiple spellings should be consolidated to one agent
-- You want to standarize name spellings
+Use **Agent Aliases** to standardize name variations so reporting stays accurate.
 
-## Agent Name Mappings
+This is helpful when transcripts contain abbreviations, misspellings, or alternate spellings for the same person.
 
-### Adding a Mapping
+## Agent Aliases Overview
 
-1. Click **Add Mapping**
-2. Enter the **Source Name** - the name as it appears in transcripts
-3. Enter the **Target Name** - the correct/standardized name
-4. Click **Save**
+The page shows all users and includes:
 
-All calls with the source name will now report under the target name.
+- **Type** (Login Access or Agent Only)
+- **Login** email (if available)
+- **Teams**
+- **Aliases** count
+- **Configure** action
 
-### Example Use Cases
+Users are grouped into:
+- **Managed: Login Access**
+- **Managed: Agent Only**
+- **Inferred / Unassigned**
 
-| Source Name | Target Name | Why |
-|-------------|-------------|-----|
-| "John D" | "John Doe" | Standardize abbreviated names |
-| "JDoe" | "John Doe" | Merge system IDs with real names |
-| "Jon Doe" | "John Doe" | Standardize name spellings |
+## Configure Aliases for a User
 
-## Teams
+1. Open **Account Settings** and select the **Agent Aliases** tab
+2. Search for the user
+3. Click **Configure**
+4. In the dialog, review **Current Aliases**
+5. In **Add Alias**, enter an alternate name that appears in transcripts
+6. Save to add the alias
 
-Tea let you group agents into teams for filtering and reporting.
+## Remove an Alias
 
-### Creating a Team
+1. Open **Configure** for the user
+2. In **Current Aliases**, remove the alias you no longer want
+3. Confirm removal
 
-1. Click **Add Team**
-2. Enter a team name (e.g., "Sales Team", "Support")
-3. Assign agents to the team
+## Example Alias Patterns
 
-### Using Teams
+| Transcript Name | Standard User Name | Why |
+|----------------|--------------------|-----|
+| `John D` | `John Doe` | Abbreviation normalization |
+| `JDoe` | `John Doe` | System ID to display name mapping |
+| `Jon Doe` | `John Doe` | Spelling normalization |
 
-Once configured, teams appear as filters in:
-- Dashboard
-- Analytics
-- Coaching Opportunities
+## When to Use This vs User Management
 
-This lets you view performance by team rather than individual agents.
+- Use **User Management** to create users, control login access, and assign teams
+- Use **Agent Aliases** to normalize alternate names for scoring and analytics

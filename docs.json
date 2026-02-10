@@ -51,6 +51,7 @@
             "pages": [
               "app-guide/users",
               "app-guide/agent-management",
+              "app-guide/teams",
               "app-guide/metadata"
             ]
           }

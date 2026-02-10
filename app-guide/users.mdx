@@ -1,37 +1,60 @@
 ---
-title: "Users"
-description: "Manage user access and roles"
+title: "User Management"
+description: "Create users, manage login access, and assign teams"
 icon: "users"
 ---
 
-Manage who has access to your EmberQA organization.
+Use the **User Management** tab in Account Settings to create users, control login access, and manage team assignments.
 
-## User List
+## User Management Overview
 
-The Users tab shows all users in your organization with:
-- **Email** - User's email address
-- **Role** - Their permission level
-- **Status** - Active or pending invitation
+The user list is grouped into sections so you can quickly find who needs attention:
 
-## Inviting a New User
+- **Managed: Login Access** - users who can sign in
+- **Managed: Agent Only** - users used for scoping/reporting only
+- **Inferred / Unassigned** - AI-inferred names with activity but no login/team setup yet
 
-1. Click **Invite User**
-2. Enter their email address
-3. Select a role
-4. Click **Send Invite**
+You can search by user name or login email from the search bar at the top.
 
-The user will receive an email to set up their account.
+## Add a User
 
-## User Roles
+1. Go to **Account Settings** and open the **User Management** tab
+2. Click **Add User**
+3. Enter **User Name**
+4. Set **Login Access**:
+   - ON: user can sign in and receives an invite email
+   - OFF: user is created as agent-only (no invite)
+5. If Login Access is ON, enter the user's **Email**
+6. Select at least one **Team**
+7. Click **Send Invite** (or **Create Agent Only**)
 
-| Role | Access |
-|------|--------|
-| **Admin** | Full access to all settings, data, and billing |
-| **Manager** | Can view all data and manage agents, but not account settings |
-| **Agent** | Can only view their own performance data and coaching insights |
+<Tip>
+Team assignment is required when creating a user.
+</Tip>
 
-## Managing Users
+## Manage an Existing User
 
-For each user you can:
-- **Change Role** - Select a different role from the dropdown
-- **Remove** - Click the delete icon to remove access
+1. Find the user in the list
+2. Click **Manage**
+3. In the dialog, update:
+   - **Login Access** toggle
+   - **Email** (when login access is enabled)
+   - **Teams** assignment
+4. Click **Save Changes**
+
+<Tip>
+You cannot remove your own login access from this dialog.
+</Tip>
+
+## Login Access Types
+
+| Type | Behavior |
+|------|----------|
+| **Login Access** | User can sign in and appears with an associated login email |
+| **Agent Only** | User cannot sign in; used for team scoping and reporting |
+
+## Inferred / Unassigned Users
+
+The **Inferred / Unassigned** section helps you clean up transcript-detected names that are not fully configured yet.
+
+Use **Show** to expand this list, then convert relevant entries into managed users by opening **Manage** and assigning teams/login access.
