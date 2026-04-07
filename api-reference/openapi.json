@@ -49,8 +49,8 @@
                 "media_url": "https://example.com/call-audio.mp3",
                 "is_inbound": true,
                 "metadata": {
-                  "key1": "value1",
-                  "key2": "value2"
+                  "example_property": "example_value",
+                  "example_property2": "example_value2"
                 },
                 "language": "en",
                 "supporting_docs": [
@@ -148,8 +148,8 @@
                     "agent_name": "John D",
                     "media_url": "https://example.com/document.pdf",
                     "metadata": {
-                      "key1": "value1",
-                      "key2": "value2"
+                      "example_property": "example_value",
+                      "example_property2": "example_value2"
                     }
                   }
                 },
@@ -162,8 +162,8 @@
                       "https://example.com/document2.pdf"
                     ],
                     "metadata": {
-                      "key1": "value1",
-                      "key2": "value2"
+                      "example_property": "example_value",
+                      "example_property2": "example_value2"
                     }
                   }
                 }
@@ -395,9 +395,8 @@
                 ],
                 "extraction_template_id": "ecf1adf3-11f5-4ff7-a4d1-92367384d7ba",
                 "metadata": {
-                  "customer_id": "CUST-12345",
-                  "document_type": "contract",
-                  "priority": "high"
+                  "example_property": "example_value",
+                  "example_property2": "example_value2"
                 },
                 "run_id": "Contract-12345-Review"
               }
@@ -577,8 +576,8 @@
                         "status": "completed",
                         "created_time": "2024-01-15T10:30:00Z",
                         "metadata": {
-                          "customer_id": "CUST-12345",
-                          "document_type": "contract"
+                          "example_property": "example_value",
+                          "example_property2": "example_value2"
                         },
                         "output_schema": {
                           "contract_number": {
@@ -700,9 +699,8 @@
             },
             "description": "Key-value pairs for additional call metadata",
             "example": {
-              "customer_id": "12345",
-              "call_type": "support",
-              "department": "technical"
+              "example_property": "example_value",
+              "example_property2": "example_value2"
             }
           },
           "language": {
@@ -719,7 +717,8 @@
           "is_inbound": {
             "type": "boolean",
             "nullable": true,
-            "description": "Optional flag indicating whether the call was inbound. Set to true for inbound calls, false for outbound calls. If omitted, EmberQA will treat the direction as unknown.",
+            "default": true,
+            "description": "Boolean flag indicating whether the call was inbound. Defaults to true when omitted.",
             "example": true
           },
           "supporting_docs": {
@@ -774,9 +773,8 @@
             },
             "description": "Key-value pairs for additional document metadata",
             "example": {
-              "customer_id": "12345",
-              "interaction_type": "support",
-              "department": "technical"
+              "example_property": "example_value",
+              "example_property2": "example_value2"
             }
           }
         }
@@ -914,8 +912,8 @@
             },
             "description": "Optional custom key-value pairs for filtering and tracking. Searchable via /workflows/getData",
             "example": {
-              "customer_id": "CUST-12345",
-              "document_type": "contract"
+              "example_property": "example_value",
+              "example_property2": "example_value2"
             }
           }
         }

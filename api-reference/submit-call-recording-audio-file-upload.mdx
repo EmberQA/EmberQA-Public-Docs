@@ -19,7 +19,8 @@ api: "POST /scoring/submitRecording"
 </ParamField>
 
 <ParamField body="is_inbound" type="boolean">
-  Set to `true` for inbound calls or `false` for outbound calls.
+  Boolean flag indicating whether the call was inbound. Defaults to `true`
+  when omitted.
 </ParamField>
 
 <ParamField body="transcript_url" type="string">

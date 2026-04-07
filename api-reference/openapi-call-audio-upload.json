@@ -28,31 +28,31 @@
         "x-codeSamples": [
           {
             "lang": "curl",
-            "source": "curl --request POST \\\n  --url https://api.emberqa.com/api/scoring/submitRecording \\\n  --header 'Authorization: Bearer <token>' \\\n  --form 'file=@call-audio.mp3' \\\n  --form 'agent_name=Jane D' \\\n  --form 'language=en' \\\n  --form 'is_inbound=true' \\\n  --form 'transcript_url=https://example.com/transcript.txt' \\\n  --form 'metadata={\"customer_id\":\"12345\",\"department\":\"support\"}'"
+            "source": "curl --request POST \\\n  --url https://api.emberqa.com/api/scoring/submitRecording \\\n  --header 'Authorization: Bearer <token>' \\\n  --form 'file=@call-audio.mp3' \\\n  --form 'agent_name=Jane D' \\\n  --form 'is_inbound=true' \\\n  --form 'metadata={\"example_property\":\"example_value\",\"example_property2\":\"example_value2\"}'"
           },
           {
             "lang": "python",
-            "source": "import json\nimport requests\n\nurl = 'https://api.emberqa.com/api/scoring/submitRecording'\nheaders = {'Authorization': 'Bearer <token>'}\n\nwith open('call-audio.mp3', 'rb') as audio_file:\n    response = requests.post(\n        url,\n        headers=headers,\n        files={'file': ('call-audio.mp3', audio_file, 'audio/mpeg')},\n        data={\n            'agent_name': 'Jane D',\n            'language': 'en',\n            'is_inbound': 'true',\n            'transcript_url': 'https://example.com/transcript.txt',\n            'metadata': json.dumps({\n                'customer_id': '12345',\n                'department': 'support',\n            }),\n        },\n        timeout=60,\n    )\n\nprint(response.json())"
+            "source": "import json\nimport requests\n\nurl = 'https://api.emberqa.com/api/scoring/submitRecording'\nheaders = {'Authorization': 'Bearer <token>'}\n\nwith open('call-audio.mp3', 'rb') as audio_file:\n    response = requests.post(\n        url,\n        headers=headers,\n        files={'file': ('call-audio.mp3', audio_file, 'audio/mpeg')},\n        data={\n            'agent_name': 'Jane D',\n            'is_inbound': 'true',\n            'metadata': json.dumps({\n                'example_property': 'example_value',\n                'example_property2': 'example_value2',\n            }),\n        },\n        timeout=60,\n    )\n\nprint(response.json())"
           },
           {
             "lang": "javascript",
-            "source": "import fs from 'node:fs';\nimport axios from 'axios';\nimport FormData from 'form-data';\n\nconst url = 'https://api.emberqa.com/api/scoring/submitRecording';\nconst form = new FormData();\n\nform.append('file', fs.createReadStream('call-audio.mp3'));\nform.append('agent_name', 'Jane D');\nform.append('language', 'en');\nform.append('is_inbound', 'true');\nform.append('transcript_url', 'https://example.com/transcript.txt');\nform.append('metadata', JSON.stringify({\n  customer_id: '12345',\n  department: 'support',\n}));\n\nconst response = await axios.post(url, form, {\n  headers: {\n    Authorization: 'Bearer <token>',\n    ...form.getHeaders(),\n  },\n  maxBodyLength: Infinity,\n});\n\nconsole.log(response.data);"
+            "source": "import fs from 'node:fs';\nimport axios from 'axios';\nimport FormData from 'form-data';\n\nconst url = 'https://api.emberqa.com/api/scoring/submitRecording';\nconst form = new FormData();\n\nform.append('file', fs.createReadStream('call-audio.mp3'));\nform.append('agent_name', 'Jane D');\nform.append('is_inbound', 'true');\nform.append('metadata', JSON.stringify({\n  example_property: 'example_value',\n  example_property2: 'example_value2',\n}));\n\nconst response = await axios.post(url, form, {\n  headers: {\n    Authorization: 'Bearer <token>',\n    ...form.getHeaders(),\n  },\n  maxBodyLength: Infinity,\n});\n\nconsole.log(response.data);"
           },
           {
             "lang": "php",
-            "source": "<?php\n\n$client = new \\GuzzleHttp\\Client();\n$response = $client->request('POST', 'https://api.emberqa.com/api/scoring/submitRecording', [\n    'headers' => [\n        'Authorization' => 'Bearer <token>',\n    ],\n    'multipart' => [\n        [\n            'name' => 'file',\n            'contents' => fopen('call-audio.mp3', 'r'),\n            'filename' => 'call-audio.mp3',\n        ],\n        ['name' => 'agent_name', 'contents' => 'Jane D'],\n        ['name' => 'language', 'contents' => 'en'],\n        ['name' => 'is_inbound', 'contents' => 'true'],\n        ['name' => 'transcript_url', 'contents' => 'https://example.com/transcript.txt'],\n        ['name' => 'metadata', 'contents' => json_encode([\n            'customer_id' => '12345',\n            'department' => 'support',\n        ])],\n    ],\n]);\n\necho $response->getBody();"
+            "source": "<?php\n\n$client = new \\GuzzleHttp\\Client();\n$response = $client->request('POST', 'https://api.emberqa.com/api/scoring/submitRecording', [\n    'headers' => [\n        'Authorization' => 'Bearer <token>',\n    ],\n    'multipart' => [\n        [\n            'name' => 'file',\n            'contents' => fopen('call-audio.mp3', 'r'),\n            'filename' => 'call-audio.mp3',\n        ],\n        ['name' => 'agent_name', 'contents' => 'Jane D'],\n        ['name' => 'is_inbound', 'contents' => 'true'],\n        ['name' => 'metadata', 'contents' => json_encode([\n            'example_property' => 'example_value',\n            'example_property2' => 'example_value2',\n        ])],\n    ],\n]);\n\necho $response->getBody();"
           },
           {
             "lang": "java",
-            "source": "import java.io.File;\nimport kong.unirest.core.HttpResponse;\nimport kong.unirest.core.Unirest;\n\nHttpResponse<String> response = Unirest.post(\"https://api.emberqa.com/api/scoring/submitRecording\")\n  .header(\"Authorization\", \"Bearer <token>\")\n  .field(\"file\", new File(\"call-audio.mp3\"))\n  .field(\"agent_name\", \"Jane D\")\n  .field(\"language\", \"en\")\n  .field(\"is_inbound\", \"true\")\n  .field(\"transcript_url\", \"https://example.com/transcript.txt\")\n  .field(\"metadata\", \"{\\\"customer_id\\\":\\\"12345\\\",\\\"department\\\":\\\"support\\\"}\")\n  .asString();\n\nSystem.out.println(response.getBody());"
+            "source": "import java.io.File;\nimport kong.unirest.core.HttpResponse;\nimport kong.unirest.core.Unirest;\n\nHttpResponse<String> response = Unirest.post(\"https://api.emberqa.com/api/scoring/submitRecording\")\n  .header(\"Authorization\", \"Bearer <token>\")\n  .field(\"file\", new File(\"call-audio.mp3\"))\n  .field(\"agent_name\", \"Jane D\")\n  .field(\"is_inbound\", \"true\")\n  .field(\"metadata\", \"{\\\"example_property\\\":\\\"example_value\\\",\\\"example_property2\\\":\\\"example_value2\\\"}\")\n  .asString();\n\nSystem.out.println(response.getBody());"
           },
           {
             "lang": "go",
-            "source": "package main\n\nimport (\n  \"bytes\"\n  \"fmt\"\n  \"io\"\n  \"mime/multipart\"\n  \"net/http\"\n  \"os\"\n)\n\nfunc main() {\n  file, err := os.Open(\"call-audio.mp3\")\n  if err != nil {\n    panic(err)\n  }\n  defer file.Close()\n\n  var body bytes.Buffer\n  writer := multipart.NewWriter(&body)\n\n  _ = writer.WriteField(\"agent_name\", \"Jane D\")\n  _ = writer.WriteField(\"language\", \"en\")\n  _ = writer.WriteField(\"is_inbound\", \"true\")\n  _ = writer.WriteField(\"transcript_url\", \"https://example.com/transcript.txt\")\n  _ = writer.WriteField(\"metadata\", \"{\\\"customer_id\\\":\\\"12345\\\",\\\"department\\\":\\\"support\\\"}\")\n\n  part, err := writer.CreateFormFile(\"file\", \"call-audio.mp3\")\n  if err != nil {\n    panic(err)\n  }\n  if _, err := io.Copy(part, file); err != nil {\n    panic(err)\n  }\n  writer.Close()\n\n  req, err := http.NewRequest(\"POST\", \"https://api.emberqa.com/api/scoring/submitRecording\", &body)\n  if err != nil {\n    panic(err)\n  }\n  req.Header.Set(\"Authorization\", \"Bearer <token>\")\n  req.Header.Set(\"Content-Type\", writer.FormDataContentType())\n\n  resp, err := http.DefaultClient.Do(req)\n  if err != nil {\n    panic(err)\n  }\n  defer resp.Body.Close()\n\n  responseBody, _ := io.ReadAll(resp.Body)\n  fmt.Println(string(responseBody))\n}"
+            "source": "package main\n\nimport (\n  \"bytes\"\n  \"fmt\"\n  \"io\"\n  \"mime/multipart\"\n  \"net/http\"\n  \"os\"\n)\n\nfunc main() {\n  file, err := os.Open(\"call-audio.mp3\")\n  if err != nil {\n    panic(err)\n  }\n  defer file.Close()\n\n  var body bytes.Buffer\n  writer := multipart.NewWriter(&body)\n\n  _ = writer.WriteField(\"agent_name\", \"Jane D\")\n  _ = writer.WriteField(\"is_inbound\", \"true\")\n  _ = writer.WriteField(\"metadata\", \"{\\\"example_property\\\":\\\"example_value\\\",\\\"example_property2\\\":\\\"example_value2\\\"}\")\n\n  part, err := writer.CreateFormFile(\"file\", \"call-audio.mp3\")\n  if err != nil {\n    panic(err)\n  }\n  if _, err := io.Copy(part, file); err != nil {\n    panic(err)\n  }\n  writer.Close()\n\n  req, err := http.NewRequest(\"POST\", \"https://api.emberqa.com/api/scoring/submitRecording\", &body)\n  if err != nil {\n    panic(err)\n  }\n  req.Header.Set(\"Authorization\", \"Bearer <token>\")\n  req.Header.Set(\"Content-Type\", writer.FormDataContentType())\n\n  resp, err := http.DefaultClient.Do(req)\n  if err != nil {\n    panic(err)\n  }\n  defer resp.Body.Close()\n\n  responseBody, _ := io.ReadAll(resp.Body)\n  fmt.Println(string(responseBody))\n}"
           },
           {
             "lang": "ruby",
-            "source": "require 'faraday'\nrequire 'faraday/multipart'\nrequire 'json'\n\nconn = Faraday.new do |f|\n  f.request :multipart\n  f.request :url_encoded\n  f.adapter Faraday.default_adapter\nend\n\nresponse = conn.post('https://api.emberqa.com/api/scoring/submitRecording') do |req|\n  req.headers['Authorization'] = 'Bearer <token>'\n  req.body = {\n    file: Faraday::Multipart::FilePart.new('call-audio.mp3', 'audio/mpeg'),\n    agent_name: 'Jane D',\n    language: 'en',\n    is_inbound: 'true',\n    transcript_url: 'https://example.com/transcript.txt',\n    metadata: JSON.generate({\n      customer_id: '12345',\n      department: 'support'\n    })\n  }\nend\n\nputs response.body"
+            "source": "require 'faraday'\nrequire 'faraday/multipart'\nrequire 'json'\n\nconn = Faraday.new do |f|\n  f.request :multipart\n  f.request :url_encoded\n  f.adapter Faraday.default_adapter\nend\n\nresponse = conn.post('https://api.emberqa.com/api/scoring/submitRecording') do |req|\n  req.headers['Authorization'] = 'Bearer <token>'\n  req.body = {\n    file: Faraday::Multipart::FilePart.new('call-audio.mp3', 'audio/mpeg'),\n    agent_name: 'Jane D',\n    is_inbound: 'true',\n    metadata: JSON.generate({\n      example_property: 'example_value',\n      example_property2: 'example_value2'\n    })\n  }\nend\n\nputs response.body"
           }
         ],
         "security": [
@@ -72,7 +72,7 @@
                 "agent_name": "Jane D",
                 "language": "en",
                 "is_inbound": true,
-                "metadata": "{\"customer_id\":\"12345\",\"department\":\"support\"}"
+                "metadata": "{\"example_property\":\"example_value\",\"example_property2\":\"example_value2\"}"
               }
             }
           }
@@ -174,14 +174,13 @@
           "language": {
             "type": "string",
             "description": "Language code for the call audio. Defaults to English (\"en\") if not provided.",
-            "example": "en",
-            "default": "en"
+            "example": "en"
           },
           "is_inbound": {
             "type": "boolean",
             "nullable": true,
             "default": true,
-            "description": "Optional flag indicating whether the call was inbound. Defaults to true when omitted.",
+            "description": "Boolean flag indicating whether the call was inbound. Defaults to true when omitted.",
             "example": true
           },
           "transcript_url": {
@@ -191,7 +190,8 @@
           },
           "transcript_text": {
             "type": "string",
-            "description": "Optional inline plain text transcript."
+            "description": "Optional inline plain text transcript.",
+            "example": "Speaker 0: Thank you for calling EmberQA.\nSpeaker 1: Hi, I need help with my order."
           },
           "metadata": {
             "type": "string",

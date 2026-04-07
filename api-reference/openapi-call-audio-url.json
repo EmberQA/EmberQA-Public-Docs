@@ -41,10 +41,10 @@
                 "agent_name": "John D",
                 "media_url": "https://example.com/call-audio.mp3",
                 "is_inbound": true,
-                "language": "en",
+
                 "metadata": {
-                  "customer_id": "12345",
-                  "department": "support"
+                  "example_property": "example_value",
+                  "example_property2": "example_value2"
                 },
                 "supporting_docs": [
                   "https://example.com/crm-information.pdf",
@@ -152,14 +152,13 @@
           "language": {
             "type": "string",
             "description": "Language code for the call audio. Defaults to English (\"en\") if not provided.",
-            "example": "en",
-            "default": "en"
+            "example": "en"
           },
           "is_inbound": {
             "type": "boolean",
             "nullable": true,
             "default": true,
-            "description": "Optional flag indicating whether the call was inbound. Defaults to true when omitted.",
+            "description": "Boolean flag indicating whether the call was inbound. Defaults to true when omitted.",
             "example": true
           },
           "transcript_url": {
