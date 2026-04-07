@@ -195,7 +195,7 @@
           },
           "metadata": {
             "type": "string",
-            "description": "Optional stringified JSON metadata object."
+            "description": "Optional stringified JSON metadata object.\n\nExample: `{\"example_property\":\"example_value\",\"example_property2\":\"example_value2\"}`"
           }
         }
       },
