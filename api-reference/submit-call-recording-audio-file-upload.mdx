@@ -1,0 +1,45 @@
+---
+title: "Submit Call Recording (Audio File Upload)"
+description: "Submit a call for scoring by uploading an audio file with multipart form data"
+api: "POST /scoring/submitRecording"
+---
+
+## Multipart Form Fields
+
+<ParamField body="file" type="file" required>
+  Audio file upload. Supported formats: `mp3`, `wav`.
+</ParamField>
+
+<ParamField body="agent_name" type="string">
+  Name of the agent who handled the call.
+</ParamField>
+
+<ParamField body="language" type="string" default="en">
+  Language code for the call audio.
+</ParamField>
+
+<ParamField body="is_inbound" type="boolean">
+  Set to `true` for inbound calls or `false` for outbound calls.
+</ParamField>
+
+<ParamField body="transcript_url" type="string">
+  Optional publicly accessible URL to a plain text transcript file.
+</ParamField>
+
+<ParamField body="transcript_text" type="string">
+  Optional inline plain text transcript.
+</ParamField>
+
+<ParamField body="metadata" type="object">
+  Optional JSON metadata. When using multipart form data, send this as a
+  stringified JSON object.
+</ParamField>
+
+`transcript_url` and `transcript_text` are optional on this page. Use them only if you want to provide your own transcript alongside the uploaded audio file.
+
+## Response
+
+<ResponseField name="message" type="string" required>
+  Returns `File Accepted` when the call has been accepted for asynchronous
+  processing.
+</ResponseField>

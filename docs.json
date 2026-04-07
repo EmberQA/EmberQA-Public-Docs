@@ -9,6 +9,30 @@
   },
   "appearance": { "default": "light" },
   "favicon": "/favicon.svg",
+  "api": {
+    "mdx": {
+      "server": "https://api.emberqa.com/api",
+      "auth": {
+        "method": "bearer"
+      }
+    },
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": [
+        "curl",
+        "python",
+        "javascript",
+        "php",
+        "java",
+        "go",
+        "ruby"
+      ],
+      "defaults": "all",
+      "prefill": true
+    }
+  },
   "navigation": {
     "tabs": [
       {
@@ -71,14 +95,13 @@
               {
                 "group": "Calls",
                 "pages": [
-                  "POST /scoring/submitRecording"
+                  "/api-reference/openapi-call-audio-url.json POST /scoring/submitRecording",
+                  "/api-reference/openapi-call-audio-upload.json POST /scoring/submitRecording"
                 ]
               },
               {
                 "group": "Documents",
-                "pages": [
-                  "POST /scoring/submitDocument"
-                ]
+                "pages": ["POST /scoring/submitDocument"]
               }
             ]
           },

@@ -1,0 +1,216 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "EmberQA Call Scoring API - Audio URL",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.emberqa.com/api",
+      "description": "Production server"
+    }
+  ],
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "paths": {
+    "/scoring/submitRecording": {
+      "post": {
+        "summary": "Submit Call Recording (Audio File URL)",
+        "description": "Submit a call recording for scoring and analysis by providing a publicly accessible URL to the audio file.",
+        "operationId": "submitRecordingAudioFileUrl",
+        "tags": ["Calls"],
+        "x-mint": {
+          "content": "## Audio Requirements\n\nBefore submitting recordings, ensure they meet these requirements:\n\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 50MB\n- **Audio quality:** Minimum 8kHz sample rate recommended\n\n## Security Recommendation\n\nFor better security, we recommend using a time-limited presigned URL instead of a permanently public file URL whenever possible.\n\nLearn more: [AWS S3 presigned URL sharing](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)"
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AudioUrlRequest"
+              },
+              "example": {
+                "agent_name": "John D",
+                "media_url": "https://example.com/call-audio.mp3",
+                "is_inbound": true,
+                "language": "en",
+                "metadata": {
+                  "customer_id": "12345",
+                  "department": "support"
+                },
+                "supporting_docs": [
+                  "https://example.com/crm-information.pdf",
+                  "https://example.com/customer-notes.txt"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "File Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                },
+                "example": {
+                  "message": "File Accepted"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "{error message}"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "{error message}"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "{error message}"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "{error message}"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "API Key",
+        "description": "API key obtained from the EmberQA dashboard under the \"Integrations\" tab"
+      }
+    },
+    "schemas": {
+      "AudioUrlRequest": {
+        "type": "object",
+        "required": ["media_url"],
+        "properties": {
+          "media_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Publicly accessible URL to the audio file (MP3 or WAV, max 50MB)",
+            "example": "https://example.com/call-audio.mp3"
+          },
+          "agent_name": {
+            "type": "string",
+            "description": "Name of the agent who handled the call",
+            "example": "John D"
+          },
+          "language": {
+            "type": "string",
+            "description": "Language code for the call audio. Defaults to English (\"en\") if not provided.",
+            "example": "en",
+            "default": "en"
+          },
+          "is_inbound": {
+            "type": "boolean",
+            "nullable": true,
+            "default": true,
+            "description": "Optional flag indicating whether the call was inbound. Defaults to true when omitted.",
+            "example": true
+          },
+          "transcript_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Optional publicly accessible URL to a plain text transcript file."
+          },
+          "transcript_text": {
+            "type": "string",
+            "description": "Optional inline plain text transcript.",
+            "example": "Speaker 0: Thank you for calling EmberQA.\nSpeaker 1: Hi, I need help with my order."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Optional key-value metadata to store with the call"
+          },
+          "supporting_docs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "Optional array of publicly accessible URLs to supporting documents.",
+            "example": [
+              "https://example.com/crm-information.pdf",
+              "https://example.com/customer-notes.txt"
+            ]
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "File Accepted"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "{error message}"
+          }
+        }
+      }
+    }
+  }
+}
