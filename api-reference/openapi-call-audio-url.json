@@ -23,7 +23,7 @@
         "operationId": "submitRecordingAudioFileUrl",
         "tags": ["Calls"],
         "x-mint": {
-          "content": "## Audio Requirements\n\nBefore submitting recordings, ensure they meet these requirements:\n\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 50MB\n- **Audio quality:** Minimum 8kHz sample rate recommended\n\n## Security Recommendation\n\nFor better security, we recommend using a time-limited presigned URL instead of a permanently public file URL whenever possible.\n\nLearn more: [AWS S3 presigned URL sharing](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)"
+          "content": "## Audio Requirements\n\nBefore submitting recordings, ensure they meet these requirements:\n\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 100MB\n- **Audio quality:** Minimum 8kHz sample rate recommended\n\n## Security Recommendation\n\nFor better security, we recommend using a time-limited presigned URL instead of a permanently public file URL whenever possible.\n\nLearn more: [AWS S3 presigned URL sharing](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)"
         },
         "security": [
           {
@@ -141,7 +141,7 @@
           "media_url": {
             "type": "string",
             "format": "uri",
-            "description": "Publicly accessible URL to the audio file (MP3 or WAV, max 50MB)",
+            "description": "Publicly accessible URL to the audio file (MP3 or WAV, max 100MB)",
             "example": "https://example.com/call-audio.mp3"
           },
           "agent_name": {

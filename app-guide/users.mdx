@@ -4,9 +4,9 @@ description: "Create users, manage login access, and assign teams"
 icon: "users"
 ---
 
-Use the **User Management** tab in Account Settings to create users, control login access, and manage team assignments.
+Use the **User Management** tab in Account Settings to create users, control login access, manage team assignments, and store user-level custom data.
 
-## User Management Overview
+## Find the Right User
 
 The user list is grouped into sections so you can quickly find who needs attention:
 
@@ -26,7 +26,8 @@ You can search by user name or login email from the search bar at the top.
    - OFF: user is created as agent-only (no invite)
 5. If Login Access is ON, enter the user's **Email**
 6. Select at least one **Team**
-7. Click **Send Invite** (or **Create Agent Only**)
+7. Add custom data if needed
+8. Click **Send Invite** (or **Create Agent Only**)
 
 <Tip>
 Team assignment is required when creating a user.
@@ -39,19 +40,28 @@ Team assignment is required when creating a user.
 3. In the dialog, update:
    - **Login Access** toggle
    - **Email** (when login access is enabled)
+   - **SMS 2FA Required** when available for login users
    - **Teams** assignment
+   - **Custom Data**
 4. Click **Save Changes**
 
 <Tip>
 You cannot remove your own login access from this dialog.
 </Tip>
 
-## Login Access Types
+## Choose Login Access
 
-| Type | Behavior |
-|------|----------|
-| **Login Access** | User can sign in and appears with an associated login email |
-| **Agent Only** | User cannot sign in; used for team scoping and reporting |
+Turn **Login Access** on when the person should be able to sign in. Turn it off when the user only needs to exist for team scoping, reporting, scoring, or agent assignment.
+
+## SMS 2FA
+
+For login-access users, admins can require SMS two-factor authentication. If login access is turned off for a user, SMS 2FA is disabled for that user.
+
+SSO logins bypass SMS 2FA.
+
+## Custom Data
+
+Custom data stores key-value properties on a user. These values can support organization-specific routing, whitelabel behavior, or reporting.
 
 ## Inferred / Unassigned Users
 

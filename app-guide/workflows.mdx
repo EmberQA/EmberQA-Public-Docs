@@ -6,128 +6,47 @@ icon: "robot"
 
 Workflows let you automatically extract structured data from documents using AI. Define what data you need, upload documents, and get structured results.
 
-## Workflows Overview
+## Create an Extraction Template
 
-The Workflows page has two tabs:
+Start with a template. A template tells EmberQA what fields to extract from each document.
 
-1. **Workflow Runs** - See all documents that have been processed
-2. **Extraction Templates** - Create and manage extraction templates
+1. Open **Extraction Templates**
+2. Click **Create New Template**
+3. Enter a template name
+4. Add the properties you want extracted
+5. Save the template
 
-## Workflow Runs Tab
+Use clear property descriptions. The description is the instruction the AI uses when deciding what value to return.
 
-This tab shows all documents submitted for data extraction.
+## Choose Property Types
 
-### Table Columns
+Use **Extract Text** when the answer should be copied or summarized from the document, such as a customer name, invoice number, contract date, or total amount.
 
-| Column | Description |
-|--------|-------------|
-| **Filename** | Name of the uploaded document |
-| **Extraction Template** | Which template was used for extraction |
-| **Status** | Pending, Processing, Completed, or Failed |
-| **Created** | When the document was submitted to EmberQA |
+Use **Select One** when the answer should be one of a fixed set of choices. For each option, provide the returned value and a short description of when to choose it.
 
-### Filtering Workflow Runs
+Good Select One fields include document status, document type, priority, or approval outcome.
 
-Click the **Filters** section to expand it. Available filters:
+## Submit Documents
 
-| Filter | Description |
-|--------|-------------|
-| **Status** | Filter by Pending, Processing, Completed, or Failed |
-| **Extraction Template** | Show only runs using a specific template |
-| **Filename** | Search by document filename |
+Documents can be submitted from the [Upload](/app-guide/upload) page or through the [Workflow API](/api-reference/workflow-submission/submit-workflow).
 
-After setting filters, click **Apply Filters**. Use **Clear All** to reset.
+When submitting from the app, select an extraction template and enter a workflow run ID. The run ID is a human-readable name for the batch, such as `January-2025-Insurance-Review`.
 
-### Viewing Run Details
+You can optionally associate the workflow batch with an agent.
 
-Click any row to open the detail popup. The popup shows:
+## Review Workflow Runs
 
-**Basic Information**
-- Filename
-- Extraction Template used
-- Created timestamp
+Open **Workflow Runs** to track submitted documents.
 
-**Failure Reason** (if applicable)
-- If the extraction failed, you'll see the error message explaining why
+Use filters when you need to find a specific run by status, extraction template, or filename. Status helps separate documents that are still pending or processing from completed or failed runs.
 
-**Metadata**
-- Any custom metadata attached to the document (shown as key-value pairs)
+Click a run to review the extracted data, AI reasoning, metadata, associated agent, and any failure reason. If the workflow included supporting documents, they are available from the same detail view.
 
-**Extracted Data**
-- A table showing each property defined in the template
-- For each property: the extracted value and the AI's reasoning for that extraction
-- If extraction is still in progress, you'll see a "Data extraction is in progress..." message
-
-**Supporting Documents**
-- If the workflow included supporting documents, you can view them here
-
-Use the **Previous/Next** buttons to navigate between workflow runs.
-
-## Extraction Templates Tab
-
-Extraction templates define what data to pull from your documents. Think of them as forms that the AI fills out by reading your documents.
-
-### Template List
-
-The list shows all your extraction templates with:
-
-| Column | Description |
-|--------|-------------|
-| **Template Name** | Display name for the template |
-| **ID** | Unique identifier (used in API calls) |
-| **Properties** | Chips showing each field the template extracts |
-| **Actions** | View or Edit buttons |
-
-### Creating a New Template
-
-1. Click **Create New Template**
-2. Enter a **Template Name**
-3. Add **Properties** - these are the fields you want to extract
-
-For each property, you'll define:
-- **Property Name** - The field name (e.g., "invoice_number", "customer_name")
-- **Description** - Instructions telling the AI what to look for
-- **Type** - Either:
-  - **Extract Text** - AI extracts free-form text
-  - **Select One** - AI picks from predefined options you provide
-
-4. Click **Save** when done
-
-### Property Types Explained
-
-**Extract Text**
-Use this when you want the AI to find and extract text from the document. Examples:
-- Customer name
-- Invoice number
-- Contract date
-- Total amount
-
-**Select One**
-Use this when the answer should be one of a fixed set of options. For each option, provide:
-- **Option Key** - The value that will be returned (e.g., "approved")
-- **Option Value** - Description of when to select this option (e.g., "Document shows approval signature")
-
-Examples:
-- Status: Approved, Denied, Pending
-- Document Type: Invoice, Quote, Receipt
-- Priority: High, Medium, Low
-
-### Editing Templates
+## Update a Template
 
 1. Find the template in the list
 2. Click **Edit**
 3. Make your changes
 4. Click **Save**
 
-### Viewing Template Details
-
-Click **View** on any template to see its full configuration without entering edit mode.
-
-## Submitting Documents for Extraction
-
-Documents can be submitted via:
-
-- **Bulk Upload page** - Manual upload through the UI
-- **API** - Programmatic submission (see [Workflow API](/api-reference/workflow-submission/submit-workflow))
-
-When submitting, you'll select which Extraction Template to use. The AI will then process the document and extract data according to that template's properties.
+Use **View** when you only need to inspect a template without changing it.

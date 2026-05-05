@@ -4,41 +4,37 @@ description: "Submit calls, documents, or workflow files"
 icon: "cloud-arrow-up"
 ---
 
-The Upload page lets you submit files for processing. Use the tabs to choose what type of files you're uploading.
+The Upload page lets you submit files for processing. Start by choosing what you want EmberQA to do with the files.
 
-## Tabs
+## Choose the Upload Type
 
-### Call Processing
+Use **Call Processing** for call QA scoring. You can upload MP3 or WAV files, up to 50 files per batch and up to 100MB per file.
 
-Upload audio files for call QA scoring.
+Use **Document Processing** for document QA scoring. You can upload PDF, TXT, MD, RTF, PNG, or JPG files, up to 20 files per batch and up to 100MB per file.
 
-- **Formats**: MP3, WAV
-- **Limit**: Up to 50 files, up to 100MB each
+Use **Workflow Processing** when you want to extract structured data from documents. You can upload PDF, TXT, MD, RTF, PNG, or JPG files, up to 200 files per batch and up to 100MB per file.
 
-### Document Processing
+Workflow uploads require an extraction template and workflow run ID before upload. You can optionally associate the workflow batch with an agent.
 
-Upload documents for document QA scoring.
-
-- **Formats**: PDF, TXT, MD, RTF, PNG, JPG
-- **Limit**: Up to 20 files, max 50MB total
-
-### Workflow Processing
-
-Upload files for workflow extraction (data extraction from documents).
-
-- **Formats**: PDF, TXT, MD, RTF, PNG, JPG
-- **Limit**: Up to 200 files, max 50MB total
-
-You'll need to select an extraction template before uploading workflow files.
-
-## How to Upload
+## Upload Files
 
 1. Select the appropriate tab for your file type
-2. Drag and drop files, or click to browse
-3. (For workflows) Select an extraction template
-4. Click **Upload**
+2. Drag and drop files, or click **Browse Files**
+3. For call uploads, choose the call direction or leave it on your organization default
+4. For call uploads, add batch metadata if needed
+5. For workflows, select an extraction template and enter a workflow run ID
+6. Click **Upload**
 
 After upload completes, you'll be redirected to the appropriate dashboard to view results.
+
+## Add Call Direction and Metadata
+
+Call uploads include an **Upload Settings** section:
+
+- **Call Direction** - Use organization default, Inbound, or Outbound. The selected value applies to every file in the batch.
+- **Upload Metadata** - Dashboard metadata fields appear by default. You can add other key-value pairs and they will apply to every file in the batch.
+
+Text metadata fields can use existing values or new values. Number metadata fields must contain valid numbers, and duplicate metadata keys are blocked before upload.
 
 ## API Upload
 

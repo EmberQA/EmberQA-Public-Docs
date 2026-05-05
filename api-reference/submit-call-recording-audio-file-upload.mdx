@@ -7,7 +7,8 @@ api: "POST /scoring/submitRecording"
 ## Multipart Form Fields
 
 <ParamField body="file" type="file" required>
-  Audio file upload. Supported formats: `mp3`, `wav`.
+  Audio file upload. Supported formats: `mp3`, `wav`. Maximum file size:
+  `100MB`.
 </ParamField>
 
 <ParamField body="agent_name" type="string">

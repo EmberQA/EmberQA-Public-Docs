@@ -4,44 +4,50 @@ description: "Find agents who need targeted coaching"
 icon: "users"
 ---
 
-The Coaching page shows agents who consistently fail specific metrics, helping you identify where targeted coaching would be most effective.
+The Coaching page shows agents who consistently miss specific metrics, helping you identify where targeted coaching would be most effective.
 
 For agents, this page appears as **"Improvement"** and shows only their own data.
 
-## Filters
+## Find Coaching Opportunities
 
-| Filter | Options |
-|--------|---------|
-| **Team** | Filter by agent tag (managers only) |
-| **Days Back** | 1 day, 7 days, or 30 days |
-| **Minimum Fail Percentage** | 20% to 80% threshold |
-| **Content Type** | Calls or Documents |
+Start by choosing the scope you want to review:
 
-## What You See
+- Use **Team** to focus on the agents you manage
+- Use **Days Back** to choose the performance window
+- Use **Content Type** to review calls, documents, or both
+- Raise **Minimum Fail Percentage** when you only want the most consistent misses
+- Raise **Minimum Items Missed** when you want to avoid coaching from a very small sample
 
-### Metrics Summary Chart
+If no opportunities appear at the default filters, the page may broaden the initial view so you can still see available coaching insights.
 
-A chart showing which metrics are failed most often across all agents (managers only).
+## Decide Where to Focus
 
-### Agent List
+Managers see a summary of the metrics missed most often across visible agents. Use it to decide whether the issue is isolated to one person or showing up across a team.
 
-Each agent with coaching opportunities shows:
-- **Agent name** with their average score
-- **Number of metrics** needing improvement
-- **Table of metrics** with:
-  - Total calls/documents
-  - Failed count
-  - Fail rate percentage
-  - **Coaching Insights** button
+Each agent card shows the metrics where that agent is struggling, including the fail rate, missed count, coaching-note history, and monitoring status when Monitoring is enabled.
 
-## Coaching Insights
+Use this list to pick one clear coaching topic instead of trying to cover every missed metric at once.
+
+## Get Coaching Talking Points
 
 Click the **Coaching Insights** button on any metric to open an AI-powered analysis.
 
-The AI scans all calls/documents where the agent failed that specific metric and generates:
+The analysis uses the agent's actual missed calls or documents to produce:
 
-- **Specific guidance** on how to improve on that metric
-- **Concrete examples** from the agent's actual calls showing what to do differently
-- **Links to each failed call/document** so you can review them in full detail
+- Specific guidance for that metric
+- Concrete examples from the agent's work
+- Links back to the failed calls or documents
 
-This gives managers targeted talking points for 1:1 coaching sessions, and helps agents understand exactly what they need to change.
+This gives managers better 1:1 notes and helps agents understand what to change.
+
+## Save Coaching Notes
+
+Save notes after a coaching conversation so the history stays tied to the right agent and metric.
+
+You can save notes for one metric, several metrics for the same agent, or a team conversation about one metric across multiple agents.
+
+Saved notes appear in the coaching timeline for the agent and metric.
+
+## Track Follow-Through
+
+When Monitoring is available, managers can create a monitoring plan from a coaching opportunity. The plan is prefilled with the selected agent and metric so progress can be tracked after coaching.

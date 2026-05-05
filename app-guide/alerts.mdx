@@ -4,40 +4,41 @@ description: "Configure automated notifications"
 icon: "bell"
 ---
 
-Alerts send you notifications when specific conditions are met, such as low scores or red flags. Get notified via email or webhook in real-time.
+Alerts send notifications when specific conditions are met, such as low scores, red flags, or processing completion. Get notified via email, SMS, or webhook depending on the alert type.
 
-## Tabs
+## Decide What Should Trigger a Notification
 
-- **Alerts** - Configure alert rules
-- **History** - View past alert triggers
+Create an alert when someone needs to know about an event without checking the app manually.
+
+Common alerts include:
+
+- A call or document scored below a threshold
+- A red flag was detected
+- Processing finished and another system needs the result
 
 ## Creating an Alert
 
 1. Click **Create Alert**
 2. Enter an **Alert Name** (e.g., "Low Score Notification")
-3. Choose the **Alert Type**:
+3. Select the owning **Team**
+4. Choose the **Alert Type**:
    - **Email** - Sends an email notification
+   - **SMS** - Sends an SMS notification when available
    - **Webhook** - Sends an HTTP POST request to your URL
-4. Enter the **Contact Information** (email address or webhook URL)
-5. Select **Content Types** to monitor (Calls, Documents, or both)
-6. Choose an **Alert Trigger**:
+5. Enter the **Contact Information** (email address, phone number, or webhook URL)
+6. Select **Content Types** to monitor
+7. Choose an **Alert Trigger**:
    - **Score-based** - Triggers when score falls below your threshold
    - **Red Flag** - Triggers when any red flag is detected
    - **Completion** - Triggers when processing completes (webhook only)
-7. If score-based, set the **Score Threshold** using the slider
-8. Click **Create**
+8. If score-based, set the **Score Threshold** using the slider
+9. Click **Create**
 
-## Alert Triggers Explained
+Completion alerts require webhook delivery. Workflow content targets are available only for completion alerts.
 
-| Trigger | When It Fires |
-|---------|---------------|
-| **Score-based** | When a call/document scores at or below your threshold |
-| **Red Flag** | When any configured red flag is detected |
-| **Completion** | When any call/document finishes processing (useful for integrations) |
+## Send Results to Another System
 
-## Webhook Alerts
-
-When using webhooks, EmberQA sends a POST request to your URL with JSON data including:
+Use webhook alerts when another system should receive updates automatically. EmberQA sends a POST request to your URL with details such as:
 
 - Call/document ID and filename
 - Agent name
@@ -47,23 +48,14 @@ When using webhooks, EmberQA sends a POST request to your URL with JSON data inc
 
 Click the info icon next to the webhook URL field to view full documentation with example payloads.
 
-## Managing Alerts
+Webhook endpoints should return HTTP 200-299 within 30 seconds. EmberQA includes a `webhook_id` that can be used for idempotency.
 
-The Alerts tab lists all configured alerts. For each alert you can:
-- **Edit** - Modify the conditions or settings
-- **Delete** - Remove the alert
+## Manage Existing Alerts
 
-## Alert History
+Use the **Alerts** tab to edit an alert when the recipient, trigger, threshold, team, or content scope changes. Delete an alert when it should stop sending notifications.
 
-The History tab shows when alerts have triggered, including:
+## Check Delivery History
 
-| Column | Description |
-|--------|-------------|
-| **Alert Name** | Which alert was triggered |
-| **Type** | Email or Webhook |
-| **Content Type** | Call, Document, or Workflow |
-| **Trigger Reason** | Why the alert fired (score, red flag, etc.) |
-| **Recipient** | Where the alert was sent |
-| **Date** | When it happened |
+Use **History** to confirm whether an alert fired and where it was sent. Filter by alert, type, recipient, or date when you are investigating a specific notification.
 
-Click any row to see the full payload that was sent.
+Email payloads open in a new tab. Webhook payloads open in the payload modal.

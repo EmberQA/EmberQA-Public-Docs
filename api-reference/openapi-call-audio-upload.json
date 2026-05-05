@@ -23,7 +23,7 @@
         "operationId": "submitRecordingAudioFileUpload",
         "tags": ["Calls"],
         "x-mint": {
-          "content": "## Audio Requirements\n\nBefore submitting recordings, ensure they meet these requirements:\n\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 50MB\n- **Audio quality:** Minimum 8kHz sample rate recommended"
+          "content": "## Audio Requirements\n\nBefore submitting recordings, ensure they meet these requirements:\n\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 100MB\n- **Audio quality:** Minimum 8kHz sample rate recommended"
         },
         "x-codeSamples": [
           {
@@ -164,7 +164,7 @@
           "file": {
             "type": "string",
             "format": "binary",
-            "description": "Audio file upload (MP3 or WAV, max 50MB)"
+            "description": "Audio file upload (MP3 or WAV, max 100MB)"
           },
           "agent_name": {
             "type": "string",

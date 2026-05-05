@@ -4,9 +4,9 @@ description: "Configure custom metadata fields"
 icon: "tags"
 ---
 
-Configure custom metadata fields that appear in your dashboard filters and call details.
+Configure custom metadata fields so users can filter, review, and upload records using the fields your organization cares about.
 
-## What is Metadata?
+## Decide What Metadata You Need
 
 When you submit calls via API, you can include custom metadata like:
 - Call type (inbound/outbound)
@@ -15,26 +15,31 @@ When you submit calls via API, you can include custom metadata like:
 - Customer segment
 - Any other custom fields
 
-This tab lets you control how that metadata appears in the app.
+Use the Metadata tab to decide which of those fields should appear in the app.
 
-## Configuring Metadata Display
+## Add a Metadata Field
 
-For each metadata field, you can configure:
-
-| Setting | Description |
-|---------|-------------|
-| **Display Name** | How the field appears in the UI |
-| **Show in Dashboard** | Whether it appears as a dashboard filter |
-| **Show in Details** | Whether it appears in call detail views |
-
-## Adding Metadata Fields
-
-1. Click **Add Field**
-2. Enter the **Field Key** - must match the key you send via API
-3. Enter a **Display Name** - the user-friendly label
+1. Click **Create Property**
+2. Enter the **Property Name** - this must match the key you send via API or use during upload
+3. Select the **Type**
 4. Configure visibility options
 5. Save
 
-## Using Metadata Filters
+## Choose Where the Field Appears
+
+For each metadata field, decide whether users should see it:
+
+- In item detail views
+- As a Dashboard filter
+- As a Dashboard table column
+- As a default metadata field during upload
+
+Only enable fields where they help users find or understand records. Too many visible metadata fields can make the Dashboard harder to scan.
+
+## Filter by Metadata
 
 Once configured, metadata filters appear alongside Date, Agent, and Score filters on the Dashboard. Users can filter calls by any metadata field you've enabled.
+
+## Use the Lookup Table
+
+Use the lookup table when your organization needs reusable key/value mappings with extra properties. Entries can be created, edited, duplicated, or deleted from the app.

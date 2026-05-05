@@ -55,7 +55,8 @@
             "pages": [
               "app-guide/analytics",
               "app-guide/coaching",
-              "app-guide/training"
+              "app-guide/training",
+              "app-guide/monitoring"
             ]
           },
           {
@@ -76,7 +77,9 @@
               "app-guide/users",
               "app-guide/agent-management",
               "app-guide/teams",
-              "app-guide/metadata"
+              "app-guide/metadata",
+              "app-guide/scoring",
+              "app-guide/billing"
             ]
           }
         ]

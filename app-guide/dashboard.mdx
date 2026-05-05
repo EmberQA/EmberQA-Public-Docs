@@ -1,133 +1,89 @@
 ---
 title: "Dashboard"
-description: "Review scored calls and documents with analytics"
+description: "Find, review, and export scored calls and documents"
 icon: "gauge"
 ---
 
-The Dashboard is your central hub for reviewing all scored calls and documents. It shows analytics, lets you filter and search, and gives you detailed access to each scored item.
+The Dashboard is where you review recent scoring activity. Use it to spot changes in performance, find specific calls or documents, open the scoring details, and export the records you are looking at.
 
-## Dashboard Overview
+## Start with the Summary
 
-When you open the Dashboard, you'll see:
+The cards at the top show how much work was processed in the last 24 hours and how recent scores compare with the normal 30-day average.
 
-1. **Tabs** at the top to switch between **Calls** and **Documents**
-2. **Analytics cards** showing 24-hour metrics with 30-day comparisons
-3. **Filters** to narrow down what you're looking at
-4. **Data table** listing all scored items
+Use this area for a quick health check:
 
-## Understanding the Analytics Cards
+- **Total** shows recent volume
+- **Average Score** shows recent scoring performance
+- **Score Distribution** shows whether results are concentrated in high, mid, or low ranges
 
-The top of the dashboard shows three analytics cards (for the currently selected tab):
+Green or red comparison values show whether the last 24 hours are above or below the 30-day baseline.
 
-| Card | What It Shows |
-|------|---------------|
-| **Total (24 Hours)** | Count of calls/documents scored in the last 24 hours, compared to 30-day daily average |
-| **Avg Score (24 Hours)** | Average score for the last 24 hours, compared to 30-day average |
-| **Score Distribution** | Pie chart showing how scores break down by range (0-50, 51-70, 71-85, 86-100) |
+## Find the Records You Need
 
-Green percentages mean you're above average; red means below.
+Click **Filters** when you want to narrow the table. Common ways to use filters include:
 
-## Filtering Your Data
+- Find calls or documents from a specific date range
+- Look for low-scoring items that need attention
+- Review work for a specific agent or team
+- Search call transcripts for a keyword
+- Show only items that missed a particular metric
+- Show calls marked **Review Needed**
+- Switch between **All**, **Calls**, and **Documents**
 
-Click the **Filters** section to expand it. Available filters include:
+After choosing filters, click **Apply Filters**. Use **Clear All** to return to the default view.
 
-| Filter | Description |
-|--------|-------------|
-| **Start/End Date** | Filter by date range |
-| **Min/Max Score** | Filter by score range (0-100) |
-| **Min/Max Duration** | Filter by call duration in seconds |
-| **Agent Name** | Select or type an agent name |
-| **Team** | Filter by team/tag if you use team groupings |
-| **Failing Metric** | Find calls that failed specific rubric metrics |
-| **Red Flags Only** | Checkbox to show only calls with red flags |
-| **Metadata Filters** | Filter by any custom metadata fields you've configured |
+<Tip>
+  Keyword search applies to call transcripts. When you search by keyword, the dashboard switches to calls because documents do not have call transcripts.
+</Tip>
 
-After setting filters, click **Apply Filters**. Use **Clear All** to reset.
+## Read the Results Table
 
-## Reading the Data Table
+Each row is one scored item. Depending on whether you are viewing calls, documents, or both, the table can show the agent, score, received date, processing status, duration, review status, red flags, and any metadata columns your organization uses.
 
-The table shows one row per scored call or document:
+Use the table to decide what to open next:
 
-**For Calls:**
-- **Agent**: Who handled the call
-- **Reason for Call**: AI-detected reason/summary  
-- **Score**: Score for the call (0-100)
-- **Date/Time**: When the call was recieved by EmberQA
-- **Duration**: Call length
-- **Status**: Complete, Processing, Failed, or Error
-- Plus any custom metadata columns you've configured
+- Click a column header to sort
+- Look for red-highlighted rows when reviewing red flags
+- Check status to separate completed results from pending, invalid, errored, or ungraded items
+- Click any row to open the detail view
 
-**For Documents:**
-- **Filename**: Document name
-- **Agent**: Assigned agent
-- **Score**: Score for the document (0-100)
-- **Date/Time**: When the document was recieved by EmberQA
-- **Status**: Complete, Processing, Failed, or Error
+## Review One Item
 
-Calls/Documents with red flags appear highlighted with a red left border.
+Click a row to open the full scoring detail.
 
-Click any row to open the detail view.
+For calls, the detail view includes the call context, transcript, audio player, metadata, sentiment information when available, and the score breakdown. For documents, it includes the document context, metadata, and score breakdown without call-specific transcript or audio controls.
 
-## Reviewing a Call in Detail
+The score breakdown shows each rubric metric, whether it passed or failed, the points earned, and the reasoning behind the score. Expand a metric when you need to understand why EmberQA scored it that way.
 
-When you click a row, a popup opens showing everything about that call.
+Use the previous and next controls, or the left and right arrow keys, to move through items without closing the detail view.
 
-### Left Panel: Context & Transcript
+## Mark Review Status
 
-**Call Info Card** shows:
-- Agent name (editable by admins)
-- Date and time
-- Duration
-- Reason for call (if detected)
-- Original filename
+When a call has been checked, mark it **Reviewed**. If someone else needs to inspect it, mark it **Review Needed**.
 
-**Call Transcript** has two tabs:
-- **Formatted**: AI-cleaned version (loads automatically)
-- **Original**: Raw transcript
+The review history shows previous review actions when more than one action has been taken.
 
-**Audio Recording**: Play the call directly. Use the player controls or keyboard shortcuts:
-- Space: Play/Pause
-- Shift+Left/Right: Seek 10 seconds
+## Correct the Agent
 
-**Metadata**: Any custom metadata attached to this call.
+If a call is assigned to the wrong agent, admins can correct it from the call detail view:
 
-### Right Panel: Score Breakdown
+1. Click the pencil icon next to the agent name
+2. Enter the correct agent
+3. Click the checkmark to save
 
-**Overall Score** displayed at the top.
+Future reporting for that call will use the corrected agent.
 
-**Metric Cards** show each rubric metric with:
-- Pass/Fail indicator
-- Points earned vs possible
-- Click to expand and see the AI's reasoning
+## Edit Scoring
 
-**Edit Mode** (Admin only):
-1. Toggle the **Edit Mode** switch
+Admins can adjust scoring from the detail view when a score needs correction.
+
+1. Turn on **Edit Mode**
 2. Click any metric row to toggle it between Pass and Fail
-3. Check **Mark as Exemption** if the call shouldn't count in scoring
+3. Mark the item as an exemption if it should not count in scoring
 4. Click **Save Changes** and confirm
 
-### Navigation
+## Export Results
 
-- Use **← →** arrow buttons to move between calls
-- Use keyboard arrows (Left/Right) for faster navigation
-- Press **Escape** to close
+Click **Export** to download the current table results. Exports follow the filters you have applied, so filter first when you only need a specific date range, team, agent, status, or item type.
 
-## Reassigning an Agent
-
-If the wrong agent was detected:
-
-1. Open the call detail
-2. Click the pencil icon next to the agent name
-3. Type the correct name
-4. Click the checkmark to save
-
-The call will now report under the correct agent.
-
-## Switching Between Calls and Documents
-
-Use the **Calls** and **Documents** tabs at the top of the Dashboard. Each tab has its own:
-- Analytics cards
-- Filters
-- Data table
-
-The Documents tab works the same way as Calls, except there's no audio player in the detail view.
+Use **Refresh** when you are waiting for newly uploaded or recently processed items to appear.

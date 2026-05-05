@@ -4,32 +4,42 @@ description: "Configure automatic issue detection"
 icon: "flag"
 ---
 
-Red Flags are automatic detections that alert you to specific issues in calls. When a red flag is triggered, the call is marked in the dashboard.
+Red Flags are automatic detections that alert you to specific issues in calls or documents. When a red flag is triggered, the item is marked in the dashboard and can trigger alerts.
+
+## Decide What Should Be Flagged
+
+Create red flags for issues someone should review quickly, such as compliance misses, inappropriate language, missing verification, or policy exceptions.
+
+Write the description as a clear instruction for what should trigger the flag. Good descriptions are specific enough that a reviewer would agree whether the issue happened.
 
 ## Creating a Red Flag
 
 1. Click **Create Red Flag**
 2. Enter a **name** for the red flag (e.g., "Profanity Detected")
-3. Enter a **description** - this tells the AI what to look for
-4. Save
+3. Select the owning **Team**
+4. Enter a **description** - this tells the AI what to look for
+5. Optionally open **Advanced Conditions**
+6. Save
 
-The description should clearly explain what condition triggers the flag. For example:
+Examples:
 - "Agent used profanity or inappropriate language"
 - "Agent failed to verify customer identity"
 - "Agent promised something not within policy"
 
-## Managing Red Flags
+## Limit When a Flag Applies
 
-The list shows all your configured red flags. For each one you can:
-- **Edit** - Update the name or description
-- **Delete** - Remove the red flag
+Use **Advanced Conditions** when a red flag should only apply in certain situations.
 
-## How Red Flags Appear
+You can limit a flag by process type, metadata, or team. For example, you might apply a flag only to calls for a specific team, or only to documents with a certain metadata value.
 
-When a call triggers a red flag:
-- It shows in the Dashboard with a red flag indicator
-- The flag count appears in the call row
-- Details are visible in the call detail view
-- It appears in Daily Report red flag summaries
-- **It can trigger real-time alerts** via email or webhook (configure this in the [Alerts](/app-guide/alerts) page)
+Team conditions are not available when Document processing is selected.
 
+## Review Flagged Items
+
+When a call or document triggers a red flag, it is marked in the Dashboard and visible from the item detail view. Red flags can also appear in Daily Report summaries.
+
+To notify someone immediately, create an alert for red flag triggers on the [Alerts](/app-guide/alerts) page.
+
+## Manage Red Flags
+
+Edit a red flag when the description or scope needs to change. Delete a red flag when the issue should no longer be tracked.

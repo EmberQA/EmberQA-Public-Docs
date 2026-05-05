@@ -1,0 +1,29 @@
+---
+title: "Scoring"
+description: "Configure short-call scoring thresholds"
+icon: "sliders"
+---
+
+Use the **Scoring** tab in Account Settings to control when a call is considered too short to score reliably.
+
+If a call falls below any configured minimum, EmberQA marks it as a short transcription and excludes it from scoring.
+
+## Set Short-Call Rules
+
+Use these settings to avoid scoring calls that do not contain enough conversation to evaluate fairly.
+
+The default thresholds are:
+
+- **Minimum Word Count**: 50 words
+- **Minimum Call Duration**: 30 seconds
+- **Minimum Speaker Exchanges**: 2 exchanges
+
+Raise thresholds if short calls are still being scored when they should be excluded. Lower them only if legitimate calls are being marked too short.
+
+## Updating Scoring Configuration
+
+1. Open **Account Settings > Scoring**
+2. Update one or more threshold values
+3. Click **Save Changes**
+
+Use **Discard Changes** to reset the form back to the currently saved configuration.

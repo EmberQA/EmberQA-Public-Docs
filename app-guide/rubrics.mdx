@@ -6,31 +6,14 @@ icon: "list-check"
 
 The Rubrics page lets you manage scoring criteria and rubric-selection logic for calls and documents.
 
-## Rubrics Overview
+## Choose Calls or Documents
 
-When you open the Rubrics page, you'll see:
+Use the selector in the top right to switch between **Calls** and **Documents**. Rubrics and rubric rules update to the selected type.
 
-1. A **Rubrics** tab for managing rubric templates
-2. A **Rubric Rules** tab for automatic rubric selection
-3. A **Calls/Documents** selector in the top right
+## Create a Rubric
 
-## Rubrics Tab
-
-Use this tab to create, edit, activate, and duplicate rubrics.
-
-### What You See in the Rubrics Tab
-
-| Component | Description |
-|-----------|-------------|
-| **Create New Rubric** | Opens the rubric form |
-| **Default Rubric selector** | Sets fallback rubric used when no rubric rule matches |
-| **Rubrics table** | Lists rubric name, status, metric count, version, created date, and actions |
-
-If no default rubric is selected, the page shows a warning because scoring can fail when rules do not match.
-
-### Creating a Rubric
-
-1. Click **Create New Rubric**
+1. Open the **Rubrics** tab
+2. Click **Create New Rubric**
 2. Enter a rubric name
 3. In the **Metrics** tab, click **Add Metric**
 4. For each metric, enter:
@@ -38,56 +21,51 @@ If no default rubric is selected, the page shows a warning because scoring can f
    - **Points**
    - **True Condition** (required)
 5. Repeat until total metric points equal **100**
-6. (Optional) Open the **Advanced** tab and add tags, instructions, or exemptions
+6. (Optional) Open the **Advanced** tab and add opening lines, tags, instructions, coaching guidance, post-call workflows, or exemptions
 7. Click **Create Rubric**
 8. Choose whether to set it as the default rubric in the prompt after save
 
-### Editing a Rubric
+The total metric points must equal **100**, metric names must be unique, and at least one metric is required.
+
+For call rubrics, each metric has an AI suggestion button, and the form also has an **Audit** button in the header.
+
+## Set the Default Rubric
+
+The default rubric is used when no active rubric rule matches. If no default rubric is selected, scoring can fail for records that do not match a rule.
+
+Set a default for both calls and documents if you score both content types.
+
+## Build Clear Metrics
+
+Each metric should describe one scoring expectation. Keep the **True Condition** specific enough that a reviewer can understand why a call or document should pass.
+
+Use optional false conditions, additional instructions, and guided coaching when a metric needs more context.
+
+If you have 2 or more metrics, turn on **Reorder** to drag and reorder them.
+
+## Use Advanced Rubric Options
+
+Use **Advanced** when you need behavior beyond basic scoring:
+
+- Opening-line checks for call rubrics
+- Post-call tags
+- Reusable additional instructions
+- Coaching guidance tied to metrics
+- Post-call workflows
+- Exemption conditions where normal scoring should not apply
+
+## Edit Existing Rubrics
 
 1. Find the rubric in the table and click **Edit** (or open detail view first)
 2. Update fields in **Metrics** or **Advanced**
 3. Click **Save Changes**
 4. Confirm default rubric update if prompted
 
-### Building Metrics
+From rubric detail view, you can also duplicate, activate, deactivate, or delete inactive rubrics.
 
-Inside each metric card:
+## Route Records with Rubric Rules
 
-- **True Condition** is required
-- **False Condition** is optional and hidden by default (you can add it when needed)
-- **Additional Instruction** can be attached from the instruction list (if configured)
-
-Metric rules enforced by the form:
-- Total metric points must equal **100**
-- Metric names must be unique
-- At least one metric is required
-
-For call rubrics, each metric has an AI suggestion button, and the form also has an **Audit** button in the header.
-
-If you have 2 or more metrics, turn on **Reorder** to drag and reorder them.
-
-### Advanced Section
-
-Use this tab for optional rubric behavior:
-
-- **Post Call Tags**: Auto-add tags to call metadata during scoring
-- **Additional Instructions**: Create reusable instruction snippets for metrics
-- **Exemptions**: Define conditions where normal scoring should not apply
-
-### Working with Existing Rubrics
-
-From rubric detail view, you can:
-
-- **Edit**
-- **Duplicate**
-- **Activate/Deactivate**
-- **Delete** (inactive rubrics only)
-
-## Rubric Rules Tab
-
-Use this tab to pick a rubric automatically based on metadata.
-
-### Creating a Rule
+Rubric rules automatically choose the right rubric based on metadata or team conditions.
 
 1. Click **Create New Rule**
 2. Enter a **Rule Name**
@@ -95,21 +73,12 @@ Use this tab to pick a rubric automatically based on metadata.
 4. Choose **Conditions Required**:
    - **All** (AND)
    - **Any** (OR)
-5. Add one or more metadata conditions
+5. Add one or more metadata or team conditions
 6. Set rule active/inactive
 7. Click **Create Rule**
 
-### Managing Rules
+Team-based conditions are constrained to the team hierarchy you can manage. This keeps automatic rubric selection aligned with team permissions.
 
 Rules are shown in priority order. The first matching active rule is applied.
 
-You can also:
-- Edit existing rules
-- Delete rules
-- Toggle whether inactive rules are shown in the list
-
-## Switching Between Calls and Documents
-
-Use the selector in the top right to switch between **Calls** and **Documents**.
-
-Both the **Rubrics** and **Rubric Rules** tabs update to the selected type.
+Edit or delete rules when routing needs to change. Toggle inactive rules when you need to review older routing setup.

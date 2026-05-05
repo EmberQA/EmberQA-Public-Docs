@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "EmberQA Call Scoring API",
-    "description": "Submit call recordings programmatically for scoring and analysis. This API allows you to integrate call scoring directly into your existing systems and workflows.\n\n## Authentication\nAll requests require a Bearer token in the Authorization header. API keys are provided on the EmberQA dashboard under the \"Integrations\" tab.\n\n## Audio Requirements\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 50MB\n- **Audio quality:** Minimum 8kHz sample rate recommended",
+    "description": "Submit call recordings programmatically for scoring and analysis. This API allows you to integrate call scoring directly into your existing systems and workflows.\n\n## Authentication\nAll requests require a Bearer token in the Authorization header. API keys are provided on the EmberQA dashboard under the \"Integrations\" tab.\n\n## Audio Requirements\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 100MB\n- **Audio quality:** Minimum 8kHz sample rate recommended",
     "version": "1.0.0",
     "contact": {
       "name": "EmberQA Support",
@@ -30,7 +30,7 @@
           "Scoring"
         ],
         "x-mint": {
-          "content": "## Audio Requirements\n\nBefore submitting recordings, ensure they meet these requirements:\n\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 50MB\n- **Audio quality:** Minimum 8kHz sample rate recommended"
+          "content": "## Audio Requirements\n\nBefore submitting recordings, ensure they meet these requirements:\n\n- **Supported formats:** MP3, WAV\n- **Maximum file size:** 100MB\n- **Audio quality:** Minimum 8kHz sample rate recommended"
         },
         "security": [
           {
@@ -96,7 +96,7 @@
             }
           },
           "413": {
-            "description": "Payload Too Large - File exceeds 50MB limit",
+            "description": "Payload Too Large - File exceeds 100MB limit",
             "content": {
               "application/json": {
                 "schema": {
@@ -127,7 +127,7 @@
           "Scoring"
         ],
         "x-mint": {
-          "content": "## Document Requirements\n\nBefore submitting documents, ensure they meet these requirements:\n\n- **Supported formats:** PDF\n- **Maximum file size:** 50MB"
+          "content": "## Document Requirements\n\nBefore submitting documents, ensure they meet these requirements:\n\n- **Supported formats:** PDF\n- **Maximum file size:** 100MB"
         },
         "security": [
           {
@@ -206,7 +206,7 @@
             }
           },
           "413": {
-            "description": "Payload Too Large - File exceeds 50MB limit",
+            "description": "Payload Too Large - File exceeds 100MB limit",
             "content": {
               "application/json": {
                 "schema": {
@@ -678,7 +678,7 @@
           "media_url": {
             "type": "string",
             "format": "uri",
-            "description": "Publicly accessible URL to the audio file (MP3 or WAV, max 50MB)",
+            "description": "Publicly accessible URL to the audio file (MP3 or WAV, max 100MB)",
             "example": "https://example.com/call-audio.mp3"
           },
           "transcript_url": {
@@ -764,7 +764,7 @@
                 ]
               }
             ],
-            "description": "Publicly accessible URL(s) to the PDF file(s) (max 50MB each). Can be a single URL string or an array of URL strings."
+            "description": "Publicly accessible URL(s) to the PDF file(s) (max 100MB each). Can be a single URL string or an array of URL strings."
           },
           "metadata": {
             "type": "object",
